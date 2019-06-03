@@ -1,0 +1,160 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This is Jamie's PhD thesis style declarations                                                                                             %%
+%% If you're looking for a template you've come to the right place =)                                                                        %%
+%% I've commented each section so only take what you need and understand what you've taken!                                                  %%
+%% Also don't take the header/footer declarations without asking me cause it took ages to figure out and I want my thesis to look unique ;)  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[times]{quotchap}  	%% chapter headings
+\usepackage{color}                 						%% color latex stuff
+\usepackage{amsmath}               					%% lots of maths symbols =)
+\usepackage{amssymb}              					%% even more maths symbols =)
+\usepackage{subfigure}             					%% lets you put more than one graphic into a figure, but not terribly useful
+\usepackage{xspace}                						%% this package detects whether to put space in or not - I don't think it works very well
+\usepackage{listings}              						%% for putting some program code into the document
+\usepackage{graphicx}
+\usepackage{epsfig}                						%% lets one put (e)ps graphics into the document
+\usepackage{hhline}                						%% need these to get nice lines in some tables
+\usepackage{array}                 						%% makes some cool alterations to the tabular environment
+\usepackage{booktabs}              					%% for even prettier tables... yes it is possible!
+\usepackage{relsize}               						%% allow relative text scaling
+\usepackage{fancybox}              					%% love them fancy boxes
+\usepackage{equationformat}        			%% creates the little ovaloidish (!) boxes around my equation numbers (requires amsmath and fancybox)
+\usepackage{multirow}              					%% make tables where columns can go over many rows
+\usepackage[nottoc,notlot,notlof]{tocbibind}             %% now the bibliography shows up in the table of contents
+\usepackage{times}
+\usepackage{float} 
+\usepackage{aastex_hack}
+\usepackage{setspace}
+\usepackage{todonotes}
+\usepackage{appendix}
+\usepackage{setspace}
+\usepackage{layout} 
+\usepackage{wrapfig}
+\usepackage{tabularx}
+\usepackage{bm}
+\usepackage{lscape}
+\usepackage{rotating}
+\usepackage{multirow}
+\usepackage{footnote}
+\usepackage{longtable}
+\usepackage{geometry}
+\usepackage{pdflscape}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{setspace}              %% how about that spacing...
+\onehalfspacing                    %% lots of space between lines to make it nice and readable (needs setspace) - requirement of PhD theses
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setlength{\oddsidemargin}{0.7cm}  %% change the margins on the pages to give 30mm of white space on each side - requirement of PhD theses
+\setlength{\evensidemargin}{0.3cm}
+\setlength{\textwidth}{14.9cm}
+\setlength{\textheight}{22cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\floatpagefraction}{0.6}  %% make it so that 60% of the page must be taken up by a float before it becomes a float page
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{natbib}              %% the bibliography stylin'
+\bibpunct[, ]{(}{)}{;}{a}{}{,}     %% oh yeah, I could tell you what this does, but nah! (needs natbib)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[calcwidth]{titlesec}   %% This next bit changes the section titles to be pretty
+\titleformat{\section}[hang]{\scshape\bfseries}{\Large\thesection}{12pt}{\Large}[{\titlerule[0.5pt]}]
+\titleformat{\subsection}[hang]{\scshape\bfseries}{\thesubsection}{.5em}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{calc}                  													%% We need to calculate a width to push the right boxes over by.
+\newlength{\rightboxlength}
+\setlength{\rightboxlength}{\textwidth-14mm} 		%% the box is 10mm wide, the rules are 4mm, so 14mm in total
+\definecolor{pageboxcolor}{rgb}{9,9,9}  						%% this is the colour of the boxes at the bottom
+\usepackage{fancyhdr}              											%% I like them nice looking headers and footers - this section defines the page prettiness =)
+\fancyhead{}                       														%% first reset the headers and footers
+\fancyhead[RO]{\em \rightmark}     								%% make the odd pages have the section name on the top right
+\fancyhead[LE]{\em \leftmark}      									%% make the even pages have the chapter name on the top left
+
+\fancyfoot{}
+\fancyfoot[LE]{\fcolorbox{white}{white}{\parbox[c][5mm]{10mm}{\rule{0cm}{0mm}\color{black}{\begin{center}\bfseries {\rm\thepage}\end{center}}}}}    %% page nums on the bottom in a nice box - this is hard...
+\fancyfoot[RO]{\hspace*{\rightboxlength}\fcolorbox{white}{white}{\parbox[c][5mm]{10mm}{\rule{0cm}{0mm}\color{black}{\begin{center}\bfseries{\rm\thepage}\end{center}}}}}
+
+
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\footruleskip}{0mm}
+\pagestyle{fancy}                  			%% bring all the stylin' into effect (must come after all the fancyhead and fancyfoot stuff)
+\fancypagestyle{plain}{%           %% now redefine the plain style pages (chapter pages, contents pages) to have the same page number stuff on the bottom
+	\fancyhf{}
+	\fancyfoot[RO]{\hspace*{\rightboxlength}\fcolorbox{white}{pageboxcolor}{\parbox[c][5mm]{10mm}{\rule{0cm}{0mm}\color{black}{\begin{center}\bfseries \thepage\end{center}}}}}
+	\renewcommand{\headrulewidth}{0pt}
+	\renewcommand{\footrulewidth}{0.5pt}
+}
+\makeatletter                      %% this next section (till \makeatother) makes sure that blank pages are actually completely blank, cause they're not usually
+\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
+	\hbox{}
+	\vspace*{\fill}
+	\thispagestyle{empty}
+	\newpage
+	\if@twocolumn\hbox{}\newpage\fi\fi\fi}
+\makeatother
+
+\newlength{\numberwidth}           %% this next section is bad - a terrible hack for the compact group chapter - don't use it unless it's what you really want
+\settowidth{\numberwidth}{{\tiny 0}}
+\newcommand{\nw}{\hspace*{\numberwidth}}
+\newlength{\onewidth}
+\settowidth{\onewidth}{1}
+\newcommand{\ow}{\hspace*{\onewidth}}
+\newlength{\dotwidth}
+\settowidth{\dotwidth}{{\tiny .}}
+\newcommand{\dw}{\hspace*{\dotwidth}}
+\newlength{\minuswidth}
+\settowidth{\minuswidth}{$-$}
+\newcommand{\mw}{\hspace*{\minuswidth}}
+\newlength{\asteriskwidth}
+\settowidth{\asteriskwidth}{*}
+\newcommand{\aw}{\hspace*{\asteriskwidth}}
+\newlength{\comparisonwidth}
+\settowidth{\comparisonwidth}{$\leq$}
+\newcommand{\cw}{\hspace*{\comparisonwidth}}%
+\newlength{\pmwidth}
+\settowidth{\pmwidth}{$\pm$}
+\newcommand{\pw}{\hspace*{\pmwidth}}
+
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+% --------------  JFK-specific commands
+
+\newcommand{\toDo}{\todo[inline]}
+\def\HI{H{\textsc{i}}~} 
+\def\radm{\,rad\,m$^{-2}$~}
+\def\lamsq{$\lambda^2$~}
+\def\los{line-of-sight}
+\def\Ref{{\color{green}(\textbf{ref})}}
+\def\chisq{$\chi^2_r$}
+\def\etc{{\color{red}$\mathbf{\dots}$}}
+\def\e363{PKS\,J0548$-$3257}
+\def\mjyb{mJy\,b$^{-1}$\,}
+\def\n612{NGC\,612}
+
+
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------% 
+
+\def\kms{km~${\rm s}^{-1}$\xspace}  %% now a few definitions of my own to make life easier
+\def\mHI{\rm H\mathsmaller{I}}      %% math mode version of HI
+
+
+\newcommand{\expect}[1]{\langle{#1}\rangle}
+\renewcommand{\labelenumi}{(\arabic{enumi})}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}  %% make footnote symbols like dagger, and asterisk instead of numbers
+
+\usepackage{titlepage_sydney_uni}  %% my redefinition of \maketitle to put the UniMelb logo on the title-page, along with a nice layout
+                                      %% the option [acidfree] for this package puts the text "Produced on acid-free paper" at the bottom
+
+\newenvironment{nopointitemize}{\renewcommand\labelitemi{}\begin{itemize}}{\end{itemize}}  %% make an itemize environment with no little point
+

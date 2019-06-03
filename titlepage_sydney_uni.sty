@@ -1,0 +1,45 @@
+%% This style file was created by Jamie Stevens on 13/12/2016
+%% It allows you to put the UniSyd logo on the top of your title
+%% page, as well as keeping all the rest of the maketitle options intact.
+
+%% You'll need the university-of-sydney-logo.jpg file in your thesis directory for
+%% this style to work properly.
+
+%% This style file is called by 
+%%    \usepackage[options]{titlepage_sydney_uni}
+%% where options can be:
+%%     acidfree = puts ``Produced on acid-free paper'' at the bottom of the page
+
+\ProvidesPackage{titlepage_sydney_uni}[2016/12/13]
+\RequirePackage{graphicx}
+\newsavebox{\acidfreepaper}
+\DeclareOption{acidfree}{
+\sbox{\acidfreepaper}{\rmfamily\large Produced on acid-free paper}
+}
+\DeclareOption*{
+\sbox{\acidfreepaper}{}
+}
+
+\ProcessOptions
+\renewcommand{\maketitle}{
+\thispagestyle{empty}
+\begin{center}
+{\Huge{\textsc{\@title}}\par} 
+\vspace{1.5cm}
+{\Large\textsc{\@author}}\\
+\vspace{3.5cm}
+\includegraphics[width=6.5cm]{Chapter_Preface/CrestWithNameColour2010.pdf}\\
+\vspace{3.5cm}
+{\large\textsc{Submitted in total fulfillment of the requirements}}\\
+{\large\textsc{of the degree of Doctor of Philosophy}}\\
+\vspace{1cm}
+{\rmfamily\large \@date}\\
+\vspace{1cm}
+{\large\textsc{School of Physics}}\\
+{\large\textsc{The University of Sydney}}\\
+\vspace{5cm}
+\usebox{\acidfreepaper}
+\end{center}
+\cleardoublepage
+\setcounter{page}{1}
+}
