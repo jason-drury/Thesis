@@ -118,7 +118,7 @@ Based on these probabilities, we compute a new set of parameters for the Gaussia
 Steps 2 and 3 are repeated iteratively until convergence, where the distributions don’t change much from iteration to iteration.There are really 2 key advantages to using GMMs. Firstly GMMs are a lot more flexible in terms of cluster covariance than K-Means; due to the standard deviation parameter, the clusters can take on any ellipse shape, rather than being restricted to circles.Secondly, since GMMs use probabilities, they can have multiple clusters per data point. So if a data point is in the middle of two overlapping clusters, we can simply define its class by saying it belongs X-percent to class 1 and Y-percent to class 2. I.e GMMs support mixed membership.
 
 
-\subsection{More realistic modelling}
+%\subsection{More realistic modelling}
 
 \section{Methodology}
 
@@ -148,12 +148,12 @@ We used Gaussian Mixture Modelling (GMM) to calculate the posterior probability 
 Data selected to try to ensure as close to complete membership as possible. Download \Gaia~DR2 data for all stars within the cutoff radius of the cluster centres. Due to distance of NGC 6819 \& 6791 we do not make a magnitude cut of this point despite the significant decrease in astrometric quality for stars fainter than G = 20 mag. Only a small fraction have RVs, with almost none of the cluster members from NGC 6791 having such values, so not used. Similarly, parallax values for these clusters are very small (distances are ~2 \& ~4 kpc respectively) meaning there is a very large uncertainty on their measurements. Due to this we did not use the parallax in the clustering analysis (See \cref{sect:cuts})
 
 As reported by Lindegren et al. (2018) and confirmed
-by several other works (Riess et al. 2018; Stassun &
+by several other works (Riess et al. 2018; Stassun \&
 Torres 2018; Zinn et al. 2018), there is a zero-point offset
 in the Gaia DR2 parallaxes that needs to be considered.
 While this zero-point itself is a function of position and
 magnitude, for the remainder of this paper we adopt the
-global mean value of 29μas (in the sense that the Gaia
+global mean value of 29\,$\mu$as (in the sense that the Gaia
 parallaxes are too small) reported by Lindegren et al.
 (2018).
 
