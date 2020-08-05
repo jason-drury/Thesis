@@ -1,0 +1,371 @@
+import lightkurve as lk
+lcc = lk.search_lightcurvefile('KIC 2847282',cadence='long')
+lcc.
+lcc
+lcc = lcc.download_all()
+lc = lcc.PDCSAP_FLUX.stitch()
+lc.scatter()
+lc = lc.remove_outliers().remove_nans()
+lc.scatter()
+plt.show()
+import matplotlib.pyplot as plt
+plt.show()
+lc.normalize(unit='ppm').to_periodogram(normalization='psd').show()
+lc.normalize(unit='ppm').to_periodogram(normalization='psd').plot()
+plt.show()
+ps = lc.normalize(unit='ppm').to_periodogram(normalization='psd',oversample_factor=10)
+ps.plot()
+plt.show()
+lc 1
+lc1 = lc
+lc1 = lc.copy()
+lc2 = lk.search_lightcurvefile('KIC 2437394',cadence='long').download_all().PDCSAP_FLUX.stitch()
+lc2.scatter()
+plt.show()
+lc2.plot()
+plt.show()
+ps2 = lc2.normalize(unit='ppm').to_periodogram(normalization='psd',oversample_factor=10)
+lc2 = lc2.remove_outliers().remove_nans()
+ps2 = lc2.normalize(unit='ppm').to_periodogram(normalization='psd',oversample_factor=10)
+ps2.plot()
+plt.show()
+ps2.smooth()
+ps2.smooth().plot()
+plt.show()
+lc3 = lk.search_lightcurvefile('KIC 4484128',cadence='long').download_all().PDCSAP_FLUX.stitch()
+lc3.scatter()
+plt.show()
+lc4 = lk.search_lightcurvefile('KIC 2437060',cadence='long').download_all().PDCSAP_FLUX.stitch()
+lc4.scatter()
+plt.show()
+lc5 = lk.search_lightcurvefile('KIC 2436450',cadence='long').download_all().PDCSAP_FLUX.stitch()
+lk5.scatter()
+plt.show()
+lc5.scatter()
+plt.show()
+ps3 = lc3.normalize(unit='ppm').to_periodogram(normalization='psd',oversample_factor=10)
+ps3 = lc3.remove_nans().normalize(unit='ppm').to_periodogram(normalization='psd',oversample_factor=10)
+ps4 = lc4.remove_nans().normalize(unit='ppm').to_periodogram(normalization='psd',oversample_factor=10)
+ps5 = lc5.remove_nans().normalize(unit='ppm').to_periodogram(normalization='psd',oversample_factor=10)
+plt.figure(12,16)
+plt.figure(figsize=(12,16))
+for i,l in enumerate([lc1,lc2,lc3,lc4,lc5]):
+    ax = plt.subplot(5,1,(i+1))
+    ax.scatter(l.time,l.flux,s=1,c='k')
+plt.show()
+plt.tight_layout
+plt.tight_layout()
+plt.draw()
+plt.figure(figsize=(9,15))
+for i,l in enumerate([lc1,lc2,lc3,lc4,lc5]):
+    ax = plt.subplot(5,1,(i+1))
+    ax.scatter(l.time,l.flux,s=1,c='k')
+plt.show()
+cpaste
+load_lcs(lc4.targetid)
+lcc = load_lcs(lc4.targetid)
+plt.figure()
+for lc in lcc:
+    plt.scatter(lc.time,lc.flux,s=1,c='k')
+    )
+plt.figure()
+for lc in lcc:
+    plt.scatter(lc.time,lc.flux,s=1,c='k')
+plt.show()
+plt.figure()
+for lc in lcc:
+    plt.scatter(lc.time,lc.flux,s=1,c='k')
+plt.figure()
+for lc in lcc:
+    plt.scatter(lc.time,lc.flux,s=1,c='k')
+plt.show()
+plt.figure()
+for lc in lcc:
+    lc = manual_poly_corr(lc,1)
+    plt.scatter(lc.time,lc.flux,s=1,c='k')
+plt.show()
+plt.figure()
+for lc in lcc:
+    lc = poly_corr(lc,3)
+    plt.scatter(lc.time,lc.flux,s=1,c='k')
+plt.show()
+plt.figure()
+for lc in lcc:
+    lc = poly_corr(lc,3)
+    lc = clip(lc,keep_lowers=False)
+    
+    plt.scatter(lc.time,lc.flux,s=1,c='k')
+plt.show()
+plt.figure()
+for j,lc in enumerate(lcc):
+    lc = poly_corr(lc,3)
+    lc = clip(lc,keep_lowers=False)
+    if j >0:
+        scalefact = np.nanmean(np.diff(ref_lc.flux)/np.diff(ref_lc.time))/np.nanmean(np.diff(lc.flux)/np.diff(lc.time))
+        lc.flux*=scalefact
+    plt.scatter(lc.time,lc.flux,s=1,c='k')
+    ref_lc = lc.copy()
+plt.show()
+plt.figure()
+for j,lc in enumerate(lcc):
+    lc = poly_corr(lc,3)
+    lc = clip(lc,keep_lowers=False)
+    if j >0:
+        scalefact = np.nanmean(np.diff(ref_lc.flux)/np.diff(ref_lc.time))/np.nanmean(np.diff(lc.flux)/np.diff(lc.time))
+        lc.flux/=scalefact
+    plt.scatter(lc.time,lc.flux,s=1,c='k')
+    ref_lc = lc.copy()
+plt.show()
+plt.figure()
+for j,lc in enumerate(lcc):
+    lc = poly_corr(lc,3)
+    lc = clip(lc,keep_lowers=False)
+    if j >0:
+        scalefact = np.nanmean(np.std(ref_lc.flux))/np.nanmean(np.std(lc.flux))
+        lc.flux/=scalefact
+    plt.scatter(lc.time,lc.flux,s=1,c='k')
+    ref_lc = lc.copy()
+plt.show()
+plt.figure()
+for j,lc in enumerate(lcc):
+    lc = poly_corr(lc,3)
+    lc = clip(lc,keep_lowers=False)
+    if j >0:
+        scalefact = np.nanmean(np.std(ref_lc.flux))/np.nanmean(np.std(lc.flux))
+        lc.flux*=scalefact
+    plt.scatter(lc.time,lc.flux,s=1,c='k')
+    ref_lc = lc.copy()
+plt.show()
+plt.figure()
+for j,lc in enumerate(lcc):
+    lc = poly_corr(lc,5)
+    lc = clip(lc,keep_lowers=False)
+    if j >0:
+        scalefact = np.nanmean(np.std(ref_lc.flux))/np.nanmean(np.std(lc.flux))
+        lc.flux*=scalefact
+        shiftval = np.nanmean(ref_lc.flux)/np.nanmean(lc.flux)
+        lc.flux-=shiftval
+    plt.scatter(lc.time,lc.flux,s=1,c='k')
+    ref_lc = lc.copy()
+plt.show()
+plt.figure()
+for j,lc in enumerate(lcc):
+    lc = poly_corr(lc,5)
+    lc = clip(lc,keep_lowers=False)
+    if j >0:
+        scalefact = np.nanmean(np.std(ref_lc.flux))/np.nanmean(np.std(lc.flux))
+        lc.flux*=scalefact
+        shiftval = np.nanmean(ref_lc.flux)/np.nanmean(lc.flux)
+        lc.flux+=shiftval
+    plt.scatter(lc.time,lc.flux,s=1,c='k')
+    ref_lc = lc.copy()
+plt.show()
+lcc
+[lc.quarter for lc in lcc]
+plt.figure()
+for j,lc in enumerate(lcc):
+    lc = poly_corr(lc,5)
+    lc = clip(lc,keep_lowers=False)
+    if j >0:
+        scalefact = np.nanmean(np.std(ref_lc.flux))/np.nanmean(np.std(lc.flux))
+        lc.flux*=scalefact
+        shiftval = np.nanmean(ref_lc.flux)/np.nanmean(lc.flux)
+        lc.flux+=shiftval
+    plt.scatter(lc.time,lc.flux,s=1,c='k')
+    ref_lc = lc.copy()
+plt.show()
+plt.figure()
+for j,lc in enumerate(lcc):
+    lc = poly_corr(lc,5)
+    lc = clip(lc,keep_lowers=False)
+    if j >0:
+        scalefact = np.nanmean(np.std(ref_lc.flux))/np.nanmean(np.std(lc.flux))
+        lc.flux*=scalefact
+        shiftval = np.nanmean(ref_lc.flux)-np.nanmean(lc.flux)
+        lc.flux+=shiftval
+    plt.scatter(lc.time,lc.flux,s=1,c='k')
+    ref_lc = lc.copy()
+plt.show()
+plt.figure()
+for j,lc in enumerate(lcc):
+    lc = poly_corr(lc,5)
+    lc = clip(lc,keep_lowers=False)
+    if j >0:
+        scalefact = np.nanmean(np.var(ref_lc.flux))/np.nanmean(np.var(lc.flux))
+        lc.flux*=scalefact
+        shiftval = np.nanmean(ref_lc.flux)-np.nanmean(lc.flux)
+        lc.flux+=shiftval
+    plt.scatter(lc.time,lc.flux,s=1,c='k')
+    ref_lc = lc.copy()
+plt.show()
+plt.figure()
+for j,lc in enumerate(lcc):
+    lc = poly_corr(lc,5)
+    lc = clip(lc,keep_lowers=False)
+    if j >0:
+        scalefact = np.nanmean(np.std(ref_lc.flux))/np.nanmean(np.std(lc.flux))
+        lc.flux*=scalefact
+        shiftval = np.nanmean(ref_lc.flux)-np.nanmean(lc.flux)
+        lc.flux+=shiftval
+    plt.scatter(lc.time,lc.flux,s=1,c='k')
+    ref_lc = lc.copy()
+plt.show()
+plt.figure()
+for j,lc in enumerate(lcc):
+    lc = poly_corr(lc,5)
+    lc = clip(lc,keep_lowers=False)
+    if j == 0:
+        lcf = lc.copy()
+    if j >0:
+        scalefact = np.nanmean(np.std(ref_lc.flux))/np.nanmean(np.std(lc.flux))
+        lc.flux*=scalefact
+        shiftval = np.nanmean(ref_lc.flux)-np.nanmean(lc.flux)
+        lc.flux+=shiftval
+    plt.scatter(lc.time,lc.flux,s=1,c='k')
+    ref_lc = lc.copy()
+    lcf.append(lc)
+lcf.scatter()
+plt.show()
+plt.figure()
+for j,lc in enumerate(lcc):
+    lc = poly_corr(lc,5)
+    lc = clip(lc,keep_lowers=False)
+    if j == 0:
+        lcf = lc.copy()
+    if j >0:
+        scalefact = np.nanmean(np.std(ref_lc.flux))/np.nanmean(np.std(lc.flux))
+        lc.flux*=scalefact
+        shiftval = np.nanmean(ref_lc.flux)-np.nanmean(lc.flux)
+        lc.flux+=shiftval
+        lcf = lcf.append(lc)
+    plt.scatter(lc.time,lc.flux,s=1,c='k')
+    ref_lc = lc.copy()
+lcf.scatter()
+plt.figure()
+for j,lc in enumerate(lcc):
+    lc = poly_corr(lc,5)
+    lc = clip(lc,keep_lowers=False)
+    if j == 0:
+        lcf = lc.copy()
+    if j >0:
+        scalefact = np.nanmean(np.std(ref_lc.flux))/np.nanmean(np.std(lc.flux))
+        lc.flux*=scalefact
+        shiftval = np.nanmean(ref_lc.flux)-np.nanmean(lc.flux)
+        lc.flux+=shiftval
+        lcf = lcf.append(lc)
+    plt.scatter(lc.time,lc.flux,s=1,c='k')
+    ref_lc = lc.copy()
+plt.show()
+plt.figure(figsize=(9,15))
+for i,l in enumerate([lc1,lc2,lc3,lc4,lc5]):
+    ax = plt.subplot(5,1,(i+1))
+    ax.scatter(l.time,l.flux,s=1,c='k')
+plt.show()
+plt.figure(figsize=(9,15))
+for i,l in enumerate([lc1,lc2,lc3,lcf,lc5]):
+    ax = plt.subplot(5,1,(i+1))
+    ax.scatter(l.time,l.flux,s=1,c='k')
+plt.show()
+plt.figure(figsize=(9,15))
+for i,l in enumerate([lc1,lc2,lc3,lcf,lc5]):
+    ax = plt.subplot(5,1,(i+1))
+    ax.scatter(l.time,l.flux,s=1,c='k')
+    ax.set_xlim((lc1.time[0]-2,lc1.time[-1]+2))
+plt.show()
+plt.figure(figsize=(9,15))
+for i,l in enumerate([lc1,lc2,lc3,lcf,lc5]):
+    ax = plt.subplot(5,1,(i+1))
+    ax.scatter(l.time,l.flux,s=1,c='k')
+    ax.set_xlim((1000,1100))
+plt.show()
+plt.figure(figsize=(9,15))
+for i,l in enumerate([lc1,lc2,lc3,lcf,lc5]):
+    ax = plt.subplot(5,1,(i+1))
+    ax.scatter(l.time,l.flux,s=1,c='k')
+    ax.set_xlim((lc1.time[0]-2,lc1.time[-1]+2))
+plt.show()
+plt.figure(figsize=(9,15))
+for i,l in enumerate([lc1,lc2,lc3,lcf,lc5]):
+    ax = plt.subplot(5,1,(i+1))
+    ax.scatter(l.time,l.flux,s=1,c='k')
+    ax.set_xlim((lc1.time[0]-2,lc1.time[-1]+2))
+plt.show()
+fig = plt.figure(1)
+fig.axes
+ax = fig.axes
+dir(ax)
+dir(ax[0])
+plt.figure(figsize=(9,15))
+for i,l in enumerate([lc1,lc2,lc3,lcf,lc5]):
+    ax = plt.subplot(5,1,(i+1))
+    ax.scatter(l.time,l.flux,s=1,c='k')
+    ax.set_xlim((lc1.time[0]-2,lc1.time[-1]+2))
+    if i!=4:
+        ax.set_xticks([])
+plt.show()
+plt.xlabel('Time (days)')
+plt.ylabel('Relative Flux')
+plt.draw()
+plt.tight_layout()
+plt.figure(figsize=(9,15))
+for i,l in enumerate([lc1,lc2,lc3,lcf,lc5]):
+    ax = plt.subplot(5,1,(i+1))
+    ax.scatter(l.time,l.flux,s=1,c='k')
+    ax.set_xlim((lc1.time[0]-2,lc1.time[-1]+2))
+    if i == 2:
+        ax.set_ylabel('Relative Flux')
+    if i!=4:
+        ax.set_xticks([])
+    if i == 4:
+        ax.set_xlable('Time (days)')
+plt.hspace=0
+plt.tight_layout()
+plt.show()
+plt.figure(figsize=(9,15))
+for i,l in enumerate([lc1,lc2,lc3,lcf,lc5]):
+    ax = plt.subplot(5,1,(i+1))
+    ax.scatter(l.time,l.flux,s=1,c='k')
+    ax.set_xlim((lc1.time[0]-2,lc1.time[-1]+2))
+    if i == 2:
+        ax.set_ylabel('Relative Flux')
+    if i!=4:
+        ax.set_xticks([])
+    if i == 4:
+        ax.set_xlabel('Time (days)')
+plt.hspace=0
+plt.tight_layout()
+plt.show()
+plt.figure(figsize=(9,15))
+for i,l in enumerate([lc1,lc2,lc3,lcf,lc5]):
+    ax = plt.subplot(5,1,(i+1))
+    ax.scatter(l.time,l.flux,s=1,c='k')
+    ax.set_xlim((lc1.time[0]-2,lc1.time[-1]+2))
+    if i == 2:
+        ax.set_ylabel('Relative Flux')
+    if i!=4:
+        ax.set_xticks([])
+    if i == 4:
+        ax.set_xlabel('Time (days)')
+plt.hspace=0
+plt.tight_layout()
+plt.show()
+plt.savefig('/home/jdru4706/Dropbox_USyd/Apps/Overleaf/Thesis/Chapter1/lightcurves.png')
+history
+
+
+
+plt.figure(figsize=(9,15))
+for i,l in enumerate([ps,ps,ps2,ps2,ps3,ps3,ps4,ps4,ps5,ps5]):
+    ax = plt.subplot(5,2,(i+1))
+    if i%2 == 0:
+        ax.plot(l.frequency,l.power,color='k',lw=0.3)
+    elif i%2 == 1:
+        ax.plot(l.frequency,l.power,color='k',lw=0.3)
+        ax.set_xscale('log')
+        ax.set_yscale('log')
+    ax.set_ylabel('Power')
+    ax.set_xlabel(r'Frequency ($\mu$Hz)')
+plt.hspace=0
+plt.tight_layout()
+plt.show()
+plt.savefig('/home/jdru4706/Dropbox_USyd/Apps/Overleaf/Thesis/Chapter1/powerspectra.png')

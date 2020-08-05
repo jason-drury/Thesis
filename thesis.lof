@@ -1,0 +1,32 @@
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Variability classification tree}}{11}{figure.caption.4}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Pulsational Hertzsprung-Russell Diagram}}{15}{figure.caption.5}
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Propogation of p-modes and g-modes in a Sun-like star, with p-modes (left) of lower angular degree penetrating deeping into the stellar interior and g-modes (right) trapped within the stellar core. Image Credit: \cite {aerts_asteroseismology_2010}\relax }}{20}{figure.caption.6}
+\contentsline {figure}{\numberline {1.4}{\ignorespaces Spherical harmonics of angular degree $0 \leq l \leq 3$ and prograde modes of azimuthal order $0 \leq m \leq 3$. Retrograde modes have been omitted for conciseness. The colour scale shows the maxima (black) and minima (white) displacements of the stellar surface. The $l = 0$ mode corresponds to the radial contraction and expansion of the star. Figure from Honours thesis (Drury, 2013).\relax }}{20}{figure.caption.7}
+\contentsline {figure}{\numberline {1.5}{\ignorespaces Variable stars light curves for: (a) highly evolved, high luminosity red giant, (b) low luminosity red giant, (c) RR Lyrae, (d) eclipsing binary, (e) ellipsoidal binary, and (f) nova variable star.\relax }}{22}{figure.caption.8}
+\contentsline {figure}{\numberline {1.6}{\ignorespaces Power spectra for the light curves in Figure \ref {fig:lightcurve_examples}.\relax }}{23}{figure.caption.9}
+\contentsline {figure}{\numberline {1.7}{\ignorespaces Kepler CCD detector array prior to installation}}{27}{figure.caption.11}
+\contentsline {figure}{\numberline {1.8}{\ignorespaces {\em Kepler\tmspace +\thinmuskip {.1667em}}field of view; stylised, and full-frame image}}{29}{figure.caption.12}
+\contentsline {figure}{\numberline {1.9}{\ignorespaces Superstamps of NGC\tmspace +\thinmuskip {.1667em}6791 and NGC\tmspace +\thinmuskip {.1667em}6819}}{30}{figure.caption.13}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces HR diagram with evolutionary tracks of A-type stars}}{39}{figure.caption.14}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Schema of the {\em Gaia\tmspace +\thinmuskip {.1667em}}\nobreakspace {}detector}}{45}{figure.caption.15}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Clustering method comparison - NGC\tmspace +\thinmuskip {.1667em}6791 (I)}}{51}{figure.caption.16}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Clustering method comparison - NGC\tmspace +\thinmuskip {.1667em}6791 (II)}}{52}{figure.caption.17}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces NGC\tmspace +\thinmuskip {.1667em}6791 CMD}}{56}{figure.caption.19}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces NGC\tmspace +\thinmuskip {.1667em}6819 CMD}}{57}{figure.caption.20}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces NGC\tmspace +\thinmuskip {.1667em}6811 CMD}}{58}{figure.caption.21}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces NGC\tmspace +\thinmuskip {.1667em}6866 CMD}}{59}{figure.caption.22}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Comparison of membership probabilities for NGC\tmspace +\thinmuskip {.1667em}6791}}{61}{figure.caption.23}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Comparison of membership probabilities for NGC\tmspace +\thinmuskip {.1667em}6819}}{63}{figure.caption.24}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Comparison of membership probabilities for NGC\tmspace +\thinmuskip {.1667em}6866 and NGC\tmspace +\thinmuskip {.1667em}6866}}{64}{figure.caption.25}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Comparison of membership probabilities for NGC\tmspace +\thinmuskip {.1667em}6866 and NGC\tmspace +\thinmuskip {.1667em}6866}}{65}{figure.caption.26}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Impact of parallax inclusion in membership analysis - NGC\tmspace +\thinmuskip {.1667em}6811}}{67}{figure.caption.27}
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Impact of parallax inclusion in membership analysis - NGC\tmspace +\thinmuskip {.1667em}6866}}{67}{figure.caption.27}
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Gaia-Kepler Colour-magnitude diagram. Field stars (light grey) and cluster stars (dark grey) show a tight relation for the red giant and red clump stars, with greater scatter apparent for the main sequence stars.\relax }}{68}{figure.caption.28}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Power spectrum of KIC xxxxxxx, a typical Red Giant solar-like oscillator. The two Harvey components characterising the granulation background (red dashed lines), a Gaussian fit to the p-mode power excess (blue solid profile) and a constant white noise (grey dotted line) component are overlaid.\relax }}{75}{figure.caption.31}
+\addvspace {10\p@ }
+\addvspace {10\p@ }

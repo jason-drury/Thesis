@@ -1,254 +1,440 @@
 \chapter[Gaia cluster membership]{Open cluster membership in the \Gaia~era}
 \label{chap:membership}
 
-\section*{abstract}
-    In this chapter we present cluster membership lists for the four open clusters in the nominal \Kepler~field of view. We used a Gaussian Mixture Model (GMM) machine-learning algorithm to determine cluster membership using astrometric (position and proper motion) data from the \Gaia~space telescope. We produced a cross-matched database for the \Gaia~and \Kepler~stars in the cluster fields of view. Our cluster membership list contains 
+\section*{}
+    In this chapter we present cluster membership lists for the four open clusters in the nominal \Kepler~field of view (FoV). We used a Gaussian Mixture Model (GMM) machine-learning algorithm in conjunction with Monte Carlo simulations to determine cluster membership using astrometric (position and proper motion) data from the \Gaia~space telescope. We produced a cross-matched database for the \Gaia~and \Kepler~stars in the cluster fields of view. Our cluster membership list contains 2388 probable members within NGC\,6791, 3254 probable members within NGC\,6819, 393 probable members within NGC\,6811, and 483 probable members within NGC\,6866. We provide a comparison to the work of \cite{cantat-gaudin_gaia_2018}, who have completed similar but more limited work with a different clustering algorithm to identify all clusters in the \Gaia~dataset. We find that our method probes to fainter magnitudes and is more rigorous in terms of the membership probability determination, but suffers from kernel edge effects in spatial parameter space. This work gives similar membership determinations to that of \cite{cantat-gaudin_gaia_2018} for cluster members that lie close to the centre of the cluster in the multi-dimensional parameter space.
 \newpage
 \section{Cluster membership}
 
-NGC 6791
-One of the most studied open clusters
+Open clusters are characterised by populations of co-spatial, co-moving, iso-metallic, and coeval populations of stars (see \cref{sect:litrev_ocs}). These populations provide a critical sample for investigating stellar evolution using an ensemble approach. Prior to any analysis, cluster stars must be distinguished from the surrounding field stars. 
 
+The open clusters in the \Kepler~FoV have been the subject of numerous membership studies based on astrometric and photometric data. We discuss the most recent membership analyses based on individual clusters below, followed by those conducted homogeneously for multiple clusters.
 
-Previous cluster membership of NGC\,6791 \& NGC\,6819.
-Historical studies
+% Cluster membership was originally conducted based on spatial overdensities compared to a surrounding field population. Such studies were restricted to the crowded centres of large, dense clusters \todo{check this assumption} \cite{e.g.}{}. 
+
+% More modern studies are typically conducted by locating stars that exhibit corresponding over-densities in both their co-spatial and co-moving information. 
+
+% Methods of cluster membership
+% 	- Cospatial - earliest
+% 	- Comoving - typical
+% 		- proper motion
+% 		- RV
+% 	- Colour/photometric
+% 	-Isometallic
+
+\subsection{NGC 6791}
+
+NGC\,6791 is one of the most studied clusters in the Milky Way, with eleven separate membership analyses over the last decade. \cite{platais_new_2011} conducted one of the most thorough membership studies based on proper motion from a variety of sources. They identified 5699 probable members using the Sloan $g'$ filter \citep{fukugita_sloan_1996}, to an apparent magnitude of $g'\leq 24$, and within 0.5\,deg of the cluster centre. They isolated the proper motion over-density of the cluster, and then made a series of carefully devised photometric cuts around the CMD of the remaining stars to identify cluster members. This membership list included stars with a low probability of membership (P$_\mu \geq 2\%$) on the main sequence. This database containing membership IDs, positions, proper motions, and membership probabilities has not been published in a complete form to date. \cite{tofflemire_wiyn_2014} conducted a radial velocity membership analysis of the 280 brightest ($g' \leq 16.8$) stars classified as members by \cite{platais_new_2011} after obtaining this database by private communication. They identified 110 of these stars as likely members.
+
+A number of other incomplete membership studies have been conducted since the survey of \cite{platais_new_2011} using asteroseismology \citep{stello_asteroseismic_2011, bellamy_using_2015}, spatial information combined with radial velocity data \citep{gao_study_2012}, photometric data \citep{carraro_ub_2013, xin-hua_new_2014}, proper motion data \citep{dias_proper_2014,dias_update_2018,castro-ginard_new_2018} and a combination (from literature) of all three \citep{kharchenko_global_2013}. These studies were all limited in scope and none have provided complete lists of cluster members.
+
+\subsection{NGC 6819}
+
+NGC\,6819 has also been extensively studied, with five membership analyses over the last decade. \cite{platais_wiyn_2013} conducted the most extensive of these analyses, identifying approximately 2\,500 likely members to $V\leq22$ based on proper motion measurements of 15\,408 stars. This membership determination includes stars of low membership probability (P$_\mu \geq 4\%$) within 10\,arcsecs of the cluster centre. \cite{hole_wiyn_2009} published a radial velocity membership as part of the WOCS survey \citep{mathieu_wiyn_2000} that revealed 480 likely members of NGC\,6819. \cite{milliman_wiyn_2014} later revised this study with additional observations that revealed a total of 679 members.
+
+Other membership studies have also been conducted over the years based on photometric data \citep{burkhead_photometric_1970,lindoff_old_1972,auner_photographic_1974, rosvick_bv_1998, yang_wiyn_2013}, with \cite{kalirai_cfht_2001} presenting the most complete of these membership determinations, with up to 2\,900 potential members along the cluster CMD to $V\leq25$. Other incomplete studies have included asteroseismic data \citep{stello_asteroseismic_2011, bellamy_using_2015}, astrometric data \citep{sanders_membership_1972}, and 3-D velocity memberships \citep{gao_3d_2015}.
+
+\subsection{NGC\,6866}
+
+Prior to the \Kepler~mission NGC\,6866 was a relatively unstudied cluster, with four very incomplete membership studies based on photometric CMD identification \cite[binary membership only;][]{loktin_proper_2003}, proper motions \citep{dias_proper_2002}, and a combination of spatial and proper motion data with photometric data \citep{kharchenko_109_2005}, and radial velocity data \citep{frinchaboy_open_2008}. 
+In the last decade there have also been a number of additional membership studies based on spatial data \citep{janes_open_2014}, proper motions \citep{molenda-zakowicz_spectroscopic_2009}, and a combination of these with photometric data \citep{joshi_photometric_2012}. \cite{dias_proper_2014} used proper motion cuts to isolate co-moving stars and present 454 likely members for this cluster to a magnitude limit of $R\leq16$. \cite{joshi_identification_2016} conducted a similar proper motion analysis of stars in the cluster field but further restricted these potential members using photometric isochrone fits to the CMD. This revealed 544 likely members to a magnitude limit of $H\leq17$.
+
+\subsection{NGC\,6811}
+
+\cite{meibom_kepler_2011} presented the most complete membership study for NGC\,6811 prior to \Gaia~DR2 analyses, with 363 cluster members isolated in photometric data based on radial velocity cuts. NGC\,6811 is a relatively unstudied cluster, with five other incomplete membership studies in the past decade based on photometric data \citep{pena_determination_2011, janes_ngc_2013}, combined with proper motions \citep{kharchenko_astrophysical_2004,kharchenko_integrated_2009}, and combined with proper motions and radial velocity data \citep{frinchaboy_open_2008}
+
+\cite{curtis_temporary_2019} conducted a binary membership determination based on \Gaia~DR2 to isolate 485 likely cluster members, including 322 single members, to a \Gaia~g-band photometric limit of $G\leq20$ based on proper motion and parallax cuts combined with \Gaia~photometric isochrone fits to the CMD.
+
+\subsection{Common membership studies}
+
+\cite{cantat-gaudin_gaia_2018} (hereafter CG18) presented membership analyses conducted using the same method for all open clusters across the sky based on the Gaia-DR2 dataset \citep{gaia_collaboration_gaia_2018-1}. \cite{choi_star_2018} also presented membership analyses for the clusters of NGC\,6791, NGC\,6819, and M67, based on the same dataset. These two papers present the most recent membership analyses for multiple open clusters in the nominal \Kepler~FoV prior to this work.
+
+\cite{choi_star_2018} used the HDBSCAN algorithm on proper motion and parallax values to identify enough cluster members in NGC\,6791 and NGC\,6819 to measure the cluster ages with isochrone fitting. They were not aiming for completeness in this work and included any star with membership probabilities greater than 30\% for NGC\,6791 and greater than  50\% for NGC\,6819. Furthermore, the initial dataset was reduced using astrometric quality cuts that bias against the inclusion of fainter stars, particularly for the more distant clusters of NGC\,6791 and NGC\,6819.
+
+CG18 applied a minimum spanning tree algorithm based on k-means clustering, \textsc{Upmask}, to all stars with $G\leq18$ to identify all stellar clusters across the entire sky. They identified 1229 clusters with at least 5 members of membership probability ($P_{memb}$) $\geq50\%$, including the four open clusters in the nominal \Kepler~FoV. To obtain membership probabilities the \textsc{Upmask} code was run 10 times over the uncertainty parameter space, for proper motion and parallax, for all stars within a set radius of the identified cluster centres. The probability was determined as the number of times the star was identified as belonging within the minimum spanning tree. CG18 shows the greatest similarity to our membership determination below and a comparison of both results is made.
 
 \section{The {\em Gaia} Mission}
-The \Gaia~space telescope is a European Space Agency (ESA) mission launched in 2013 into a Lissajous-type orbit around the Lagrange-2 (L2) point, 1.5\,Mkm from Earth, in the anti-Solar direction. It was primarily designed to produce a three-dimensional astrometric map of the Milky Way. The full science goals of the mission were; (1) to map the positions of approximately 1 billion stars in the Milky Way and Local Group (to a precision of 24\,$\mu$as at 15\,mag and 200\,$\mu$as at 20\,mag), (2) to measure the proper motion velocities of these stars, (3) to produce a 3D structural map of the Milky Way, (4) to provide spectral and photometric measurements for these stars, and (5) to provide radial velocities for the 150 million brightest stars.
+The \Gaia~space telescope is a European Space Agency (ESA) mission launched in 2013 into orbit around the Lagrange-2 (L2) point, 1.5\,Mkm from Earth, in the anti-Solar direction. It was primarily designed to produce a three-dimensional astrometric map of the Milky Way. The full science goals of the mission were (1) to map the positions of approximately 1 billion stars in the Milky Way and Local Group (to a precision of 24\,$\mu$as at 15\,mag and 200\,$\mu$as at 20\,mag), (2) to measure the proper motions of these stars, (3) to produce a 3D structural map of the Milky Way, (4) to provide spectral and photometric measurements for these stars, and (5) to provide radial velocities for the 150 million brightest stars.
 
-% \newpage
+% The \Gaia~spacecraft consists of three modules: the payload module containing the single, integrated science instrument, the mechanical service module and the electrical service module. The payload instrument is responsible for delivering the astrometry, photometry and spectrometry data products and uses two identical telescopes with a shared focal plane, based on a three-mirror anastigmat design. The focal plane of the detector (Figure \ref{fig:gaia_focalplane}) has dimensions of 0.5\,m $\times$ 1.0\,m and consists of 106 CCDs that provide dedicated channels for each data product.
 
-Figure \ref{fig:Gaia_structure} shows a schematic diagram of the \Gaia~spacecraft modules; the payload module containing the single, integrated science instrument, the mechanical service module and the electrical service module. The service modules are combined in this schematic to form the equipped service module, with the propulsion tanks, solar panel arrays and phase array antenna situated below it.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.6\linewidth]{Chapter4/gaia_schematic.jpg}
-    \caption{Schematic diagram of the \Gaia~spacecraft. The electrical and mechanical service modules have been combined in this schematic into the `equipped service module structure', with the payload module displayed above.}
-    \label{fig:Gaia_structure}
-\end{figure}
-
-The payload module contains the single, integrated instrument (Figure \ref{fig:gaia_instrument} (a)) responsible for delivering the astrometry, photometry and spectrometry data products. This instrument uses two identical telescopes with a shared focal plane, based on a three-mirror anastigmat design. A detailed schematic view of the optical path to the detector is shown in Figure \ref{fig:gaia_instrument} (b). The focal plane of the detector (Figure \ref{fig:gaia_focalplane}) has dimensions of 0.5\,m $\times$ 1.0\,m and consists of 106 CCDs that provide dedicated channels for each data product.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.8\linewidth]{Chapter4/gaia_optics.png}\\
-    \vspace{25pt}
-    \includegraphics[width=0.8\linewidth]{Chapter4/gaia_foc.png}
-    \caption{Schematic diagrams of (a) The \Gaia~optical instrument bench, and (b) The optical ray path from the M4/M'4 beam combiner to the focal plane containing the CCD detectors.}
-    \label{fig:gaia_instrument}
-\end{figure}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.9\linewidth]{Chapter4/gaia_detect_edit.png}
-    \caption{Schematic diagram of the \Gaia~focal plane consisting of 106 CCDs, with the positions and dedicated instrument allocation of individual CCD modules annotated.}
-    \label{fig:gaia_focalplane}
-\end{figure}
+% \begin{figure}[hbtp]
+%     \centering
+%     \includegraphics[width=0.9\linewidth]{Chapter4/gaia_detect_edit.png}
+%     \caption[Schema of the \Gaia~detector]{Schematic diagram of the \Gaia~focal plane consisting of 106 CCDs, with the positions and dedicated instrument allocation of individual CCD modules annotated. Credit: ESA - A. Short}
+%     \label{fig:gaia_focalplane}
+% \end{figure}
 
 \subsection{Astrometry}
-The latest data release for the \Gaia~mission, Gaia DR2 (hereafter DR2), occurred in April 2018 \citep{gaia_collaboration_gaia_2018}. It contained five-parameter astrometric solutions ($\alpha$, $\delta$, $\mu_{\alpha}$, $\mu_{\delta}$, $\pi$) for 1.7\,billion stars, combined with photometric and spectrometric (G, G$_{BP}$, G$_{RP}$) magnitudes for 1.3\,billion stars. \citet{bailer-jones_estimating_2018} computed geometric distance estimates for all stars with a parallax in the DR2 release. We use both of these data products for the following analysis.
+The second data release for the \Gaia~mission, Gaia DR2 (hereafter DR2), occurred in April 2018 \citep{gaia_collaboration_gaia_2018}. It contained five-parameter astrometric solutions ($\alpha$, $\delta$, $\mu_{\alpha^*}$, $\mu_{\delta}$, $\pi$) for 1.7\,billion stars, combined with photometric and spectrometric (G, G$_{BP}$, G$_{RP}$) magnitudes for 1.3\,billion stars. \citet{bailer-jones_estimating_2018} computed geometric distance estimates for all stars with a parallax in the DR2 release. These distances were calculated using an inference approach that included length scale priors based on 3D models of the Milky Way. This method allowed distances to be inferred for all stars, even for those with high parallax uncertainties, where the length scale prior dominated the distance determination. We use both of these data products for the following analysis.
 
 \section{Clustering methods}
-We investigated a number of clustering algorithms to identify probable cluster members including Mean-Shift Clustering, Density-based Spatial Clustering of Applications with Noise (DBSCAN), and Expectation–Maximization (EM) clustering using Gaussian Mixture Models (GMM). We provide a description of how these algorithms function below, and discuss the benefits and limitations of each.
+We investigated a number of algorithms to identify probable cluster members, including Mean-Shift Clustering, Density-based Spatial Clustering of Applications with Noise (DBSCAN), the Hierarchical variant of DBSCAN (HDBSCAN), and Expectation–Maximisation (EM) clustering using Gaussian Mixture Models (GMM). We provide a description of how these algorithms function below, and discuss the benefits and limitations of each. For each of these algorithms we examined subsets of DR2 dataset centred on the four open clusters in the \Kepler~FoV. We sought to assign membership probabilities for each star in these subsets, which can be simply a binary (yes/no) membership determination depending on the algorithm used. It should be noted that the HDBSCAN algorithm lacked a python implementation when this work commenced and so was not selected as the preferred analysis method. A python implementation is now available, so it is included in this comparison to show its potential for cluster membership determination.
 
 \subsection{Mean-Shift Clustering}
 
-The mean-shift clustering algorithm locates local over-densities in N-dimensional data using a centroid-based, sliding window. The algorithm begins with a randomly-selected initialisation point at the centre of a radially-profiled kernel (e.g circular window in 2-D) in the parameter space. This kernel is iteratively shifted to higher density regions by calculating the mean of all enclosed points. The iterative shifting is concluded when the total number of points within the window no longer increases and convergence is achieved. 
+The mean-shift clustering algorithm \citep{comaniciu_mean_2002} locates local over-densities in N-dimensional data using a centroid-based, sliding window. The algorithm begins with a randomly-selected initialisation point at the centre of a radially-profiled kernel (e.g. circular window in 2-D) in the parameter space. This kernel is iteratively shifted to higher density regions by calculating the mean of all enclosed points. The iterative shifting is concluded when the total number of points within the window no longer increases and convergence is achieved. 
 
 This process is repeated with additional kernels until every data point in the parameter space is contained within a window, and thus assigned to a particular cluster. If multiple windows overlap, the window with the greatest density is preserved as the parent cluster, and the remaining windows eliminated.
 
-The primary benefit of the mean-shift clustering algorithm is its ability to locate clusters without prior knowledge of the number of clusters present. This is offset by the need to tune the kernel radius hyper-parameter, a task that may be non-trivial. This process returns a binary classification of cluster membership and does not account for data points that may not be related to any particular cluster (ie noise).
+The primary benefit of the mean-shift clustering algorithm is its ability to locate clusters without prior knowledge of the number of clusters present. This is offset by the need to tune the kernel radius hyper-parameter, a task that may be non-trivial. This process returns a yes/no classification of cluster membership and does not account for data points that may not be related to any particular cluster (i.e. noise).
 
 \vspace{10pt}
 
+\noindent{\bf In summary:}
+
 \noindent{\bf Pros}: 
 \begin{itemize}
-    \item Automatically determines the number of clusters so no prior knowledge of clusters required.
+    \item Automatically determines the number of clusters, so no prior knowledge of clusters is required.
 \end{itemize} 
 
 \noindent{\bf Cons}: 
 \begin{itemize}
     \item Selection/tuning of the kernel radius hyper-parameter can be non-trivial.
-    \item Binary classification to cluster only (member/non-member).
-    \item Cannot account for noise in data set.
-    \item Cannot account for clusters of varied density.
+    \item Binary classification to a particular cluster only (member/non-member).
+    \item Cannot account for stars that do not belong to any cluster (e.g. field stars).
+    \item Cannot account for clusters of different densities.
+    \item Does not include measurement uncertainties.
 
 \end{itemize}
 
-\subsection{Density-based Spatial Clustering of Applications with Noise (DB-SCAN)}
+\subsection{Density-based Spatial Clustering of Applications with Noise (DBSCAN)}
 
-DB-SCAN is a classification algorithm designed to locate clusters of over-density within a given parameter space whilst accounting for the presence of non-members. 
+DBSCAN is a classification algorithm designed to locate clusters of over-density within a given parameter space whilst accounting for the presence of non-members \citep{ester_density-based_1996}. These non-members are referred to as `noise' in data clustering terminology.
 
-The algorithm selects an arbitrary initialization point and calculates a distance metric for the given parameter space to all other data points. If there are a sufficient number of points, \texttt{min\_points}, within a given maximum separation, $\epsilon$, it classifies the point as belonging to a cluster, otherwise it is classified as noise. All data points within the $\epsilon$ distance vector of a cluster member are associated with the same cluster, and the classification repeated iteratively for each point, until all points within the $\epsilon$ neighborhood of the cluster have been added. This process is repeated for all unclassified data points, until all points have been assigned to a cluster or classified as noise.
+The algorithm selects an arbitrary initialisation point and calculates a distance metric for the given parameter space to all other data points. If there are at least \texttt{min\_points} within a given maximum separation, $\epsilon$, it classifies the point as belonging to a cluster, otherwise it is classified as a non-member. All data points within a distance $\epsilon$ of a cluster member are associated with the same cluster, and the classification is repeated iteratively until all points within the $\epsilon$ neighborhood of the cluster have been added. This process is repeated until all points have either been assigned to a cluster or classified as non-members.
 
-DB-SCAN's main advantage over mean-shift clustering is the ability to account for noisy data where no cluster assignment is valid. It is also capable of locating clusters of arbitrary shapes and sizes. As with mean-shift clustering, DB-SCAN has difficulty accounting for varied cluster density, as the hyper-parameters will change from cluster to cluster. Tuning the hyper-parameters to account for normalised distances between parameter spaces can also be difficult, particularly with high-dimensional data.
+DBSCAN's main advantage over mean-shift clustering is the ability to account for data that includes non-members where no cluster assignment is valid. It is also capable of locating clusters of arbitrary shapes and sizes. As with mean-shift clustering, DBSCAN has difficulty accounting for clusters of different densities, since the hyper-parameters will change from cluster to cluster. Tuning the hyper-parameters to account for normalised distances between parameter spaces can also be difficult, particularly with high-dimensional data.
 
 \vspace{10pt}
 
+\noindent{\bf In summary:}
+
 \noindent{\bf Pros}: 
 \begin{itemize}
-    \item Automatically determines the number of clusters so no prior knowledge of clusters required.
+    \item Automatically determines the number of clusters, so no prior knowledge of clusters is required.
     \item Can account for arbitrary cluster shapes and sizes.
-    \item Can account for noisy data.
+    \item Can account for datasets that include non-members.
 \end{itemize} 
 
 \noindent{\bf Cons}: 
 \begin{itemize}
     \item Selection/tuning of the distance, $\epsilon$, and minimum cluster members, \texttt{min\_points}, hyper-parameters can be non-trivial.
-    \item Normalising dimensions, and thus calculating the $\epsilon$ hyper-parameter for high-dimensional data can be difficult.
+    \item Normalising dimensions, and thus calculating the $\epsilon$ hyper-parameter for high-dimensional data, can be difficult.
     \item Binary classification to cluster only (member/non-member).
     \item Cannot account for clusters of varied density.
 \end{itemize}
 
 \subsection{Hierarchical DBSCAN (HDBSCAN)}
 
-HDBSCAN is a variation of the traditional DBSCAN algorithm. It uses a hierarchical clustering algorithm to compensate for differences in cluster densities, allowing the identification of multiple clusters with different densities. 
+HDBSCAN \citep{campello_density-based_2013} is a variation of the traditional DBSCAN algorithm. The algorithm begins by producing a new distance metric, known as a mutual reachability metric, to lower the effect of non-members preventing convergence of membership models, whilst retaining the true cluster density. It then iterates over decreasing minimal density values, based on the mutual reachability metric, required for cluster identification. The result of this iterative process is a minimum spanning tree of the data set for differing density values. The algorithm then condenses this tree based on a minimum cluster size, selecting those clusters that persist for the greatest range of density values as the clusters to be returned. 
 
-hierarchical clustering algorithm, and then using a technique to extract a flat clustering based in the stability of clusters.
+The primary benefit of HDBSCAN is its ability to include differences in cluster densities, allowing the identification of multiple clusters with different densities. In addition, HDBSCAN is capable of locating clusters of arbitrary shapes, sizes and densities. This algorithm can be used to provide a measure of the likelihood of membership, based on the stability of the clusters in hierarchical clustering space. However, this can be difficult to convert to a membership probability, making tuning the membership cutoff a non-trivial problem. The ability of this algorithm to isolate cluster members from field contaminants also depends on the relative differences between the cluster and the field densities and locations in parameter space, resulting in some cases where a clean cluster membership determination is difficult to achieve.
 
-\subsection{Expectation-Maximization (EM) using Gaussian Mixture Modelling (GMM)}
+\vspace{10pt}
 
-Gaussian Mixture Models (GMMs) give us more flexibility than K-Means. With GMMs we assume that the data points are Gaussian distributed; this is a less restrictive assumption than saying they are circular by using the mean. That way, we have two parameters to describe the shape of the clusters: the mean and the standard deviation! Taking an example in two dimensions, this means that the clusters can take any kind of elliptical shape (since we have standard deviation in both the x and y directions). Thus, each Gaussian distribution is assigned to a single cluster.
+\noindent{\bf In summary:}
 
-In order to find the parameters of the Gaussian for each cluster (e.g the mean and standard deviation) we will use an optimization algorithm called Expectation–Maximization (EM).
+\noindent{\bf Pros}: 
+\begin{itemize}
+    \item Automatically determines the number of clusters, so no prior knowledge of clusters is required.
+    \item Can account for arbitrary cluster shapes and sizes.
+    \item Can account for noisy data.
+    \item Can account for clusters of varied density.
+\end{itemize} 
 
-We begin by selecting the number of clusters (like K-Means does) and randomly initializing the Gaussian distribution parameters for each cluster.
-Given these Gaussian distributions for each cluster, compute the probability that each data point belongs to a particular cluster. The closer a point is to the Gaussian’s center, the more likely it belongs to that cluster. This should make intuitive sense since with a Gaussian distribution we are assuming that most of the data lies closer to the center of the cluster.
-Based on these probabilities, we compute a new set of parameters for the Gaussian distributions such that we maximize the probabilities of data points within the clusters. We compute these new parameters using a weighted sum of the data point positions, where the weights are the probabilities of the data point belonging in that particular cluster.
-Steps 2 and 3 are repeated iteratively until convergence, where the distributions don’t change much from iteration to iteration.There are really 2 key advantages to using GMMs. Firstly GMMs are a lot more flexible in terms of cluster covariance than K-Means; due to the standard deviation parameter, the clusters can take on any ellipse shape, rather than being restricted to circles.Secondly, since GMMs use probabilities, they can have multiple clusters per data point. So if a data point is in the middle of two overlapping clusters, we can simply define its class by saying it belongs X-percent to class 1 and Y-percent to class 2. I.e GMMs support mixed membership.
+\noindent{\bf Cons}: 
+\begin{itemize}
+    \item Selection/tuning of the minimum cluster size hyper-parameter can be non-trivial.
+    \item Overlapping over-densities within parameter space can be difficult to isolate as separate clusters.
+    \item Converting to a membership probability is difficult.
+    \item Cannot account for uncertainties in measurement.
+\end{itemize}
 
+\subsection{Expectation-Maximisation (EM) using Gaussian Mixture Modelling (GMM)}
 
+Gaussian mixture modeling (GMM) \cite[e.g.][]{mclachlan_finite_2004} is a clustering algorithm designed to efficiently identify over-densities in n-dimensional parameter spaces using a more flexible Gaussian kernel. A pre-selected number, \texttt{k}, of Gaussian kernels, greater than or equal to the number of clusters present, are randomly initialised in parameter space. The posterior probabilities of each data point belonging to the \texttt{k} Gaussian distributions are then calculated. 
+
+The algorithm then shifts the Gaussian kernels to maximise the probabilities of the data points within each distribution,using the Expectation-Maximisation (EM) algorithm \citep{blei_variational_2005}. This maximisation is achieved by summing data point positions weighted by their posterior probabilities. This process is iteratively repeated until convergence. 
+
+The primary benefit of GMMs is that the Gaussian kernels allow the membership probability of data points to be calculated with respect to a given distribution as a fractional value rather than a binary yes/no membership. This allows us to calculate the likelihood that a star belongs one possible cluster compared to another. Additionally, these kernels allow for much greater flexibility in fitting arbitrary n-dimensional cluster distributions. Since Gaussian kernels are relatively computationally inexpensive, this is also one of the fastest clustering algorithms.
+
+\vspace{10pt}
+
+\noindent{\bf In summary:}
+
+\noindent{\bf Pros}: 
+\begin{itemize}
+    \item Posterior probability of membership allows us to compare the likelihood that a star belongs to specific clusters.
+    \item Non-binary membership determination allows calculation of membership probability.
+    \item Can account for non-circular cluster shapes and sizes.
+\end{itemize} 
+
+\noindent{\bf Cons}: 
+\begin{itemize}
+    \item Cannot determine the number of clusters automatically.
+    \item Cannot account for noise in data set unless over-fitting.
+\end{itemize}
 %\subsection{More realistic modelling}
 
-\section{Methodology}
+\subsection{Algorithm testing}
 
-We used Gaussian Mixture Modelling (GMM) to calculate the posterior probability of membership for all stars within pre-determined radii of the four open clusters in the nominal \Kepler~field of view. We selected these radii to be approximately 2.5 times the literature reported radius for each cluster to ensure no potential cluster members were missed. Table \ref{tab:cluster_selection} presents the positions and radial distance cuts we used for each cluster. 
+We tested each of the above four algorithms on the four open clusters in the \Kepler~field of view based on two sets of input parameters: (1) position and proper motion, and (2) position, proper motion, and parallax. To obtain the cleanest membership for each clustering method, we iterated over the input parameters for each clustering algorithm until the colour-magnitude diagram of the member stars showed a clear isochrone with few outliers. The position of stars in the CMD was not used to determine membership probabilities, but instead was used only as a manual check to ensure the cluster subset was clearly defined.
 
-\vspace{3pt}
+\begin{figure}[hbtp]
+    \centering
+    \includegraphics[width=0.92\linewidth]{Chapter4/6791_cluster_comp_pospm.png}
+    \caption[Clustering method comparison - NGC\,6791 (I)]{Comparison of clustering methods used on NGC\,6791 using position and proper motion data. We plot cluster members (blue - binary identification, colour-coded - membership probability) superimposed over the field stars (grey), with membership based on a single iteration of the clustering algorithm. We did not include measurement uncertainties in this algorithm testing, but include them in our final membership determinations.}
+    \label{fig:clustering_methods_comparison_nopara}
+\end{figure}
 
-\begin{table}[h]
+\begin{figure}[hbtp]
+    \centering
+    \includegraphics[width=0.92\linewidth]{Chapter4/6791_cluster_comp_pospmpara.png}
+    \caption[Clustering method comparison - NGC\,6791 (II)]{Same as Figure \ref{fig:clustering_methods_comparison_nopara} but using position, proper motion, and parallax data.}
+    \label{fig:clustering_methods_comparison_para}
+\end{figure}
+
+Figures \ref{fig:clustering_methods_comparison_nopara} and \ref{fig:clustering_methods_comparison_para} present the resulting cluster membership determinations for NGC\,6791. Figure \ref{fig:clustering_methods_comparison_nopara} is based solely on position and proper motion of the stars, whilst Figure \ref{fig:clustering_methods_comparison_para} also includes stellar parallax. From top to bottom, the rows present the clustering results from Mean-Shift, DBSCAN, HDBSCAN, and GMM clustering algorithms. Field stars (grey) are over-plotted with likely cluster member stars (blue for binary membership determination, and coloured points for fractional membership probability). In those cases where only grey points are shown, we were unable to find input parameters for the clustering algorithm that converged to the cluster member stars. Determining optimal hyper-parameters for each clustering algorithm is time-consuming so we have produced this comparison only for NGC\,6791. We use this cluster as the test case for selecting the algorithm to be used for the proceeding analysis.
+
+The inclusion of parallax values produces cluster CMDs that have narrower main sequences and fewer outliers from the cluster isochrone. This indicates that these outliers are non-member stars in the foreground or background that have similar proper motions to the cluster members. Whilst a comparison between these figures reveals the apparent benefit of including parallax measurements in the clustering analysis, we decided against their inclusion in our final membership determination. Both NGC\,6791 and NGC\,6819 are distant clusters, resulting in large uncertainties on the parallax measurements that are propagated through our analysis, and result in large uncertainties in the cluster membership values. Furthermore, for NGC\,6791 the inclusion of the parallax measurements results in the GMM method failing to converge to member stars.
+
+% \todo{COMPLETE THE IMAGES FOR THIS SECTION AND FOR THE APPENDICES FOR 6819, 6866, 6811}
+
+\section{Membership}
+
+The main aim of this work is to provide membership probabilities for all stars in the open clusters located in the nominal \Kepler~FoV. We are primarily focused on NGC\,6791 and NGC\,6819, with the aim to identify cluster members so the \Kepler~data of these stars can be extracted from the superstamps (see \cref{chap:intro:data}) for ensemble analysis. The other two clusters are included for completeness.
+
+We selected the Gaussian Mixture Modelling (GMM) clustering algorithm primarily based on its ability to provide a fractional membership determination for all stars, compared to the binary yes/no membership returned by the DBSCAN and Mean-Shift algorithms. A secondary consideration was the fast computational speed of the GMM algorithm, which enabled extensive sampling of the uncertainty parameter space to be completed in a realistic time frame. We also considered the ease of hyperparameter tuning with a focus on the need to re-tune these parameters as we sampled the uncertainty parameter space.
+
+We used GMM to calculate the membership probability for all stars within selected radii of the four open clusters in the nominal \Kepler~field of view. We selected these radii to be approximately 2.5 times the published radii for the larger clusters of NGC\,6791 and NGC\,6819, and 4 times the reported radii for the smaller clusters of NGC\,6811 and NGC\,6866, to ensure no potential cluster members were missed. The radii for the smaller clusters were selected to be larger than the maximum distance of possible cluster members retrieved from the HDBSCAN results reported above. Table \ref{tab:cluster_selection} presents the positions and radial distance cuts we used for each cluster. 
+
+We downloaded \Gaia~DR2 data for all stars within the radial distance cut of the cluster centres to ensure our membership determination was as complete as possible. 
+NGC\,6791 and NGC\,6819 are both distant clusters (see \cref{tab:cluster_properties}) with most cluster members being much fainter than the field stars. \cite{lindegren_gaia_2018} determined that the typical astrometric uncertainty for stars of magnitude $G=17$ is at least twice as high as those with $G<14$\,mag and suggested photometric cuts that bias against fainter stars to ensure high quality astrometric solutions. Since these clusters have many faint members we make no magnitude cuts at this point despite the significant decrease in astrometric quality for stars fainter than $G=17$\,mag. We have excluded radial velocity measurements from our analysis because these are only available for a small fraction of stars, with almost none of the cluster members from NGC\,6791 having such values. Similarly, we did not include parallax values in our clustering analysis because the values are very small (distances are $\sim$2 \& $\sim$4\,kpc, respectively), resulting in very large relative uncertainties.
+
+\begin{savenotes}
+\begin{table}[!t]
     \centering
     \setlength\tabcolsep{10pt}
     \begin{tabular}{ccccc}
         \hline
-        Cluster     & RA        & Dec       & Radius    & Radial distance cut \\
-                    &           &           & (arc mins)& (arc mins) \\
+        Cluster     & RA        & Dec       & Radius    & Radial distance \\
+                    & (deg)     & (deg)     & (arc mins) & cut (arc mins) \\
         \hline
         \hline
-        NGC 6791    & 290.2208  & 37.771    & 23.0\footnote[2]{$r_t$ - Tidal radius \citep{platais_new_2011}} & 60.0\\
-        NGC 6819    & 295.325   & 40.1867   & 15.0\footnote[2]{\citet{yang_wiyn_2013}} & 48.0\\
-        NGC 6811    & 294.3208  & 46.3883   & 7.0               & 17.5\\
-        NGC 6866    & 300.9792  & 44.1583   & 13.0              & 32.5\\
+        NGC 6791    & 290.2208  & 37.771    & 23.0\footnote[1]{ Tidal radius ($r_\tau$) \citep{platais_new_2011}} & 60.0\\
+        NGC 6819    & 295.325   & 40.1867   & 15.0\footnote[2]{\cite{yang_wiyn_2013}} & 48.0\\
+        NGC 6811    & 294.3208  & 46.3883   & 7.0\footnote[3]{\cite{janes_ngc_2013}} & 28.0\\
+        NGC 6866    & 300.9792  & 44.1583   & 14.4\footnote[4]{\cite{sagar_study_2002}} & 52.0\\
         \hline
     \end{tabular}
-    \caption{Properties of open clusters in the \Kepler~FoV and the radial distance cut used for each cluster for cross-matching the \Gaia~and \Kepler~catalogs.}
+    \caption[Cluster positions and radial cuts]{Positions and angular size of the open clusters in the \Kepler~FoV and the radial distance cut used for each cluster for determining the probability of cluster membership.}
     \label{tab:cluster_selection}
 \end{table}
+\end{savenotes}
 
-Data selected to try to ensure as close to complete membership as possible. Download \Gaia~DR2 data for all stars within the cutoff radius of the cluster centres. Due to distance of NGC 6819 \& 6791 we do not make a magnitude cut of this point despite the significant decrease in astrometric quality for stars fainter than G = 20 mag. Only a small fraction have RVs, with almost none of the cluster members from NGC 6791 having such values, so not used. Similarly, parallax values for these clusters are very small (distances are ~2 \& ~4 kpc respectively) meaning there is a very large uncertainty on their measurements. Due to this we did not use the parallax in the clustering analysis (See \cref{sect:cuts})
+%\vspace{3pt}
 
-As reported by Lindegren et al. (2018) and confirmed
-by several other works (Riess et al. 2018; Stassun \&
-Torres 2018; Zinn et al. 2018), there is a zero-point offset
-in the Gaia DR2 parallaxes that needs to be considered.
-While this zero-point itself is a function of position and
-magnitude, for the remainder of this paper we adopt the
-global mean value of 29\,$\mu$as (in the sense that the Gaia
-parallaxes are too small) reported by Lindegren et al.
-(2018).
+We used the position ($\alpha$, $\delta$) and proper motion ($\mu_{\alpha}$, $\mu_{\delta}~cos\delta$) parameter space for all \Gaia~sources within the cutoff radius in our Gaussian Mixture Modelling analysis. %\todo{citation} 
+Godoy-Rivera (2019 in prep.; priv. comm.) note that clustering methods fail to converge when including stars that are at large radial distances from the cluster centre as a result of the field population dominating the fit. To account for this, we over-fitted the field component using multiple Gaussian kernels. We selected the optimum kernel number by running initial GMM analyses on each data set, iteratively increasing the number of kernels used, until a visual inspection of the observational colour-magnitude diagram showed convergence of a Gaussian component to the cluster member population. 
 
-In order to derive reliable values for the cluster and
-field parameters, we have used the subset of our initial
-pool of stars that pass the quality cuts impossed by Zinn
-et al. (2018) (which ensure a good astrometric solution)
-and that are within 20 0 of the cluster center.(For similar samples in larger areas the field population is so dominant over the cluster that the latter becomes negligible and the method does not converge).
+This analysis was repeated using a Monte Carlo simulation, with random Gaussian noise added to each data point based on the uncertainties of the \Gaia~measurements ($\sigma_{\mu\alpha}$, $\sigma_{\mu\delta}$, $\sigma_{\alpha}$, $\sigma_{\delta}$). We included this process to sample the uncertainty parameter space and determine the probability distribution. This allowed us to account for the heteroskedastic data in our membership analysis. For each iteration of the Monte Carlo simulation, we accepted the solution if at least half of the members of one component of the GMM convergence were members in the initial member set, otherwise we rejected the solution. We repeated this process until a minimum of 1000 successful convergences were recorded for each open cluster data set.
 
-We used the position ($\alpha$ and $\delta$) and proper motion ($\mu_{\alpha}$ and $\mu_{\delta}\dot~cos\delta$) parameter space for all \Gaia~sources within the cutoff radius in our gaussian mixture model analysis. 
-run sklearn gmm on (pmra,pmdec,ra,dec) with n components (6791 = 6, 6819 = 12). n$_{}$comp chosen based on initial runs where the minimum number of components needed to converge to cluster members is accepted. Iteratively repeat using Monte Carlo (gaussian function over ($pmra_err,pmdec_err,ra_err,dec_err$)) to sample the parameter space. Accept cluster if 50$\%$ of members from initial run included in one component of the current GMM convergence, otherwise reject.
+To select likely cluster members we applied quality cuts (see \cref{tab:cluster_crossmatch}) to the GMM probability distributions based on the mean and standard deviation of the probabilities. To exclude any stars that are foreground contaminants for NGC\,6791 and NGC\,6819 we applied a further minimum distance cut of 2000\,pc and 800\,pc, respectively, based on the \cite{bailer-jones_estimating_2018} `$\texttt{r\_lo}$' values. We applied tighter distance constraints to the closer clusters of NGC\,6811 and NGC\,6866 due to the lower uncertainty on the likely cluster member parallax values (used to calculate the distances). For NGC\,6811 we set `$\texttt{r\_lo}$' $\leq 1400$\,pc and `$\texttt{r\_hi}$' $\geq 1000$\,pc. For NGC\,6866 the constraints we used were `$\texttt{r\_lo}$' $\geq 800$\,pc and `$\texttt{r\_hi}$' $\geq 1300$\,pc.
 
-Cluster:	6819 | 6791	
-Position:	[295.325, 40.1867] | [290.2208, 37.771]
-radius cut:	0.8	| 1.0
-gmm tol:	1e-5       
-gmm maxiter:	20000      
-gmm cov:	full       
-gmm weight:	dirichlet distribution
+After these quality cuts, we identify 2388 members for NGC\,6791, 3254 members for NGC\,6819, 393 members for NGC\,6811, and 483 members for NGC\,6866. Figures \ref{fig:cmd6791} to \ref{fig:cmd6866} show colour-magnitude diagrams for all four clusters, with field stars shown in light grey. 
+NGC\,6791 and NGC\,6819 both have superstamp data of the crowded cluster centres. The likely cluster members have been divided into two subsets: those that fall outside the superstamp area (dark-grey), and those that fall within the superstamps (coloured by membership probability). For the red giant branch and blue straggler regions of these CMDs the likely members falling on silicon have been further divided. We have identified non-targeted stars from the \Kepler~mission (red circles), targeted blue straggler candidates (green circles), and red giants that were targeted for less than 9 quarters of the \Kepler~mission (blue circles). 
 
-Include the images showing the probability distribution of highly-likely, likely, non-likely members and some which are ambiguous.
+Neither NGC\,6811 or NGC\,6866 have superstamp data so these clusters have all likely members colour-coded by membership probability, with all targeted cluster members (green circles) identified. We can see that the initial selection functions for cluster members were essentially complete to $G\leq16.0$ for NGC\,6811, and to $G\leq14.0$ for NGC\,6866.
 
-Describe choices made about membership and show results.
+\begin{figure}[hbtp]
+\centering
+\includegraphics[width=\linewidth]{Chapter4/cmd_6791.jpg}
+\caption[NGC\,6791 CMD]{Colour magnitude diagram of NGC\,6791 based on \Gaia{} photometry, showing field stars (light grey), and likely cluster members (dark grey) with those that fall inside the \Kepler~superstamps shaded by their posterior probability of membership. For the red giant branch (right inset) and blue straggler stars (left inset) we have further highlighted the non-targeted superstamp stars (red circles, both), red giants observed for less than nine quarters (blue circles, right), and targeted blue stragglers (green circles, left)} % posterior_prob >= 0.03, stddev_posterior_prob <= 0.3
+\label{fig:cmd6791}
+\end{figure}
 
-6791
+\begin{figure}[hbtp]
+\centering
+\includegraphics[width=\linewidth]{Chapter4/cmd_6819.jpg}
+\caption[NGC\,6819 CMD]{Same as Figure \ref{fig:cmd6791} but for NGC\,6819.} % posterior_prob >= 0.03, stddev_posterior_prob <= 0.3
+\label{fig:cmd6819}
+\end{figure}
 
+\begin{figure}[hbtp]
+\centering
+\includegraphics[width=\linewidth]{Chapter4/cmd_6811.jpg}
+\caption[NGC\,6811 CMD]{Colour magnitude diagram of NGC\,6811 based on \Gaia{} photometry, showing field stars (light grey) and likely members shaded by their posterior probability of membership. \Kepler~targeted stars (green circles) are highlighted. There are no superstamp images of this cluster.}
+\label{fig:cmd6811}
+\end{figure} % posterior_prob >= 0.05, stddev_posterior_prob <= 0.15
 
-6819
+\begin{figure}[hbtp]
+\centering
+\includegraphics[width=\linewidth]{Chapter4/cmd_6866.jpg}
+\caption[NGC\,6866 CMD]{Same as Figure \ref{fig:cmd6811} but for NGC\,6866}
+\label{fig:cmd6866}
+\end{figure} % posterior_prob >= 0.05, stddev_posterior_prob <= 0.15
+\newpage
 
-\section{Results}
+\section{Comparison with literature}
+
+CG18 conducted a membership analysis for every detected cluster in the whole-sky \Gaia~DR2 astrometric data, using a k-means-based minimal spanning tree to determine cluster membership. Their analysis was based on proper motion and parallax data, with ten iterations over the uncertainty parameter space to provide membership probability, compared to our Gaussian Mixture Model method based on proper motion and spatial data. CG18 were concerned with a large-scale automated membership analysis of every open cluster in \Gaia~DR2. We expect that analysing clusters with individually optimised parameters will allow for a more targeted, rigorous membership probability.
+
+We obtained CG18's membership probabilities for the four \Kepler~clusters. These entries do not include any stars they categorised as non-members (P$_{memb} = 0$). To account for this, we replicated the extraction procedure in CG18, selecting only stars with proper motions within 2\,mas\,yr$^{-1}$ of the identified over-density, and parallaxes within 0.3\,mas of the cluster. We used the computed median $\mu_{\alpha^{*}}$, $\mu_{\delta}$, and $\varpi$ of the probable cluster members reported in CG18 to specify these limits. We note that, despite CG18 detailing a tighter proper motion constraint of 0.5\,mas\,yr$^{-1}$ for some clusters more distant than 900\,pc, an inspection of the proper motion values for all of the cluster members in NGC\,6791 and NGC\,6819 revealed values up to double this limit. We assigned CG18 membership probabilities of 0 to any stars within these selection cuts that did not also appear in their membership lists.
+
+\subsection{NGC 6791}
+
+We have compared our membership values with those derived by CG18 for NGC\,6791 and have determined that they are mostly in agreement (see \cref{fig:CG_6791_comparison}). The small-number statistics of the bins where P$_{\rm memb}$ is between 0.1 and 0.7 probably account for the significant scatter from a linear relationship.
+
+\begin{figure}[hbtp]
+    \centering
+    \includegraphics[width=0.95\linewidth]{Chapter4/NGC6791_CG_comparison_mod.png}
+    \caption[Comparison of membership probabilities for NGC\,6791]{Comparison of membership probabilities between \cite{cantat-gaudin_gaia_2018} and this work for commonly investigated stars in NGC\,6791. (Top) The mean (red) and median (blue) of the membership distribution determined in this work for each bin corresponding to \cite{cantat-gaudin_gaia_2018}. The error bars correspond to the $1/\sqrt{\rm N}$ values for each bin and the mean and median values have been offset by $P_{\rm CG} \pm 0.01$ for visibility of the individual star membership values. The interval corresponding to $\pm$ 20\% difference in membership probability (dashed red lines) is highlighted, with the stars within this boundary shown in (b) \& (c), those above shown in (d) \& (e), and those below shown in (f) \& (g). The membership outliers are plotted in terms of their position distributions (d, f), colour-coded by the quadrature of their proper motion difference from the average cluster proper motion, and in proper motion distributions (e,g), colour-coded by their angular separation from the cluster centre. The black crosses mark the cluster centres and mean cluster proper motions.}
+    \label{fig:CG_6791_comparison}
+\end{figure}
+
+There are some outliers above and below the linear trend that show significant disagreement with our membership determination. We inspected the spatial and proper motion distributions of the 203 outliers where the CG18 probability is at least 20\% lower than our membership value (Figure \ref{fig:CG_6791_comparison} (d) \& (e)), and at least 20\% higher than our membership value (Figure \ref{fig:CG_6791_comparison} (f) \& (g)). Of particular note are the 108 stars CG18 classified as definite members of the cluster where our method predicted probabilities below 80\%. These stars account for more than 50\% of the points in panels (f) and (g). One of the potential reasons for this disagreement is that the \textsc{Upmask} code used by CG18 does not account for field stars in the membership probability determination. For stars with a P$_{\rm memb} \geq 0.8$ in CG18, this missing field component can explain the artificially higher membership probabilities, but it does not account for the large spread in our membership values.
+
+Figure \ref{fig:CG_6791_comparison} (f) and (g) reveal that for most of these outliers there is a tendency for stars at greater angular separations from the cluster to have smaller deviations in their proper motion vector relative to the cluster. We expect this trend for cluster members because those stars at the edges of the cluster potential should have lower perturbations from the mean cluster velocity. Similarly, we expect the majority of cluster members with large perturbations from the mean cluster motion to be distributed towards the cluster centre. This suggests these stars are indeed likely to be cluster members as found by CG18. We attribute our lower membership probability for these likely cluster members to the Gaussian kernels we use for clustering. These kernels exhibit sharp cutoffs at the cluster's edges within the parameter space. Our lower determinations for these stars' membership probabilities are therefore expected as the spanning tree model used by CG18 is far more lenient for stars at the edges of the cluster's parameter space.
+
+The outliers in Figure \ref{fig:CG_6791_comparison} (d) and (e), where we determined the membership probability to be at least 20\% higher than CG18, show no trend in spatial distribution relative to their motion. Based on the \cite{bailer-jones_estimating_2018} distance cuts that we made for probable members above, a little under half of these outliers are likely to be foreground contaminants. For the remainder we attribute the probability difference to the different clustering algorithms applied, specifically the density hyper-parameter in the k-means algorithm.
+
+\subsection{NGC 6819}
+
+Our membership determinations for NGC\,6819 (Fig. \ref{fig:CG_6819_comparison}) show significant differences to those determined by CG18, with our values being lower by at least 15\%. The most likely explanation for this comes from the membership methods: our Gaussian Mixture Model provides a probability as a normalised fraction of the cluster population to the combined cluster and field populations, whilst the minimal spanning tree used by CG18 accounts for no contribution to the membership probability from the field population. 
+
+NGC\,6819 is much closer to the Galactic plane and, as such, will have a much higher field contamination. This is a slightly non-linear effect across the spatial dimension of the cluster that scales in proportion to the density profile of the disk of the Milky Way in this same region. To apply a direct comparison we would need to determine the stellar density profile of the Milky Way and decrease the CG18 $P_{\rm memb}$ values accordingly for every star. This is beyond the scope of this work.
+
+There are a number of stars we classify as having much higher membership probabilities than CG18. This difference is based primarily on the inclusion of the parallax values in CG18's analysis. We elected to not include parallax in our analysis of NGC\,6791 and NGC\,6819 as the 1-$\sigma$ and 3-$\sigma$ uncertainties, respectively for these clusters, is on the order of the parallax values themselves.
+
+\begin{figure}[hbtp]
+    \centering
+    \includegraphics[width=\linewidth]{Chapter4/NGC6819_CG_comparison.png}
+    \caption[Comparison of membership probabilities for NGC\,6819]{Same as Figure \ref{fig:CG_6791_comparison} but for NGC\,6819.}
+    \label{fig:CG_6819_comparison}
+\end{figure}
+
+\subsection{NGC 6811 \& NGC 6866}
+
+Figures \ref{fig:CG_6811_comparison} and \ref{fig:CG_6866_comparison} show the comparison between the membership probabilities of CG18 and our own for NGC\,6811 and NGC\,6866. We find significant deviations, following similar trends, between the membership probabilities of CG18 and our study for these clusters. As with NGC\,6819, deviations at higher CG18 membership probabilities are probably due to the normalisation applied by the GMM method to our membership probabilities that includes the distribution of the field stars. We note that our membership probabilities are significantly higher for stars CG18 classified as low probability members ($0.2 \leq $P$_{\rm memb} \leq 0.6$). As with NGC\,6791, the low number statistics in these probability bins dominates the mean and median values.
+
+\begin{figure}[hbtp]
+    \centering
+    \includegraphics[width=\linewidth]{Chapter4/NGC6811_CG_comparison.png}
+    \caption[Comparison of membership probabilities for NGC\,6811]{Same as Figure \ref{fig:CG_6791_comparison} but for NGC\,6811.}
+    \label{fig:CG_6811_comparison}
+\end{figure}
+
+\begin{figure}[hbtp]
+    \centering
+    \includegraphics[width=\linewidth]{Chapter4/NGC6866_CG_comparison.png}
+    \caption[Comparison of membership probabilities for NGC\,6866]{Same as Figure \ref{fig:CG_6791_comparison} but for NGC\,6866.}
+    \label{fig:CG_6866_comparison}
+\end{figure}
+
+We inspected the relation between parallax, proper motion relative to the cluster, and the resulting membership probabilities derived in this work and CG18 for NGC\,6811 and NGC\,6866 (Figures \ref{fig:parallax_effect_6811} and \ref{fig:parallax_effect_6866}, respectively). It is clear from these figures that the inclusion of parallax in the clustering algorithm used by CG18 is the main reason for these lowered membership probabilities. They also appear to have a more strict density cutoff for proper-motion derived membership than that applied by our Gaussian kernel. The denser population of NGC\,6866 in parameter space, compared to NGC\,6811, has also impacted CG18's analysis, leading to much higher probability membership values for these stars.
+
+\begin{figure}[tpb]
+    \centering
+    \includegraphics[width=\linewidth]{Chapter4/NGC6811_CG_comparison_parallax_all.png}
+    \caption[Impact of parallax inclusion in membership analysis - NGC\,6811]{Relationship for NGC\,6811 between the parallax, and proper motion of stars relative to the cluster mean, colour-coded by the membership probabilities from this work (left) and CG18 (right).}
+    \label{fig:parallax_effect_6811}
+    \vspace{0.5cm}
+    \includegraphics[width=\linewidth]{Chapter4/NGC6866_CG_comparison_parallax_all.png}
+    \caption[Impact of parallax inclusion in membership analysis - NGC\,6866]{Same as Figure \ref{fig:parallax_effect_6811} but for NGC\,6866.}
+    \label{fig:parallax_effect_6866}
+\end{figure}
+
+\subsection{Comparison conclusions}
+
+Our Gaussian mixture modelling enables cluster membership to be determined as a fractional value based on the likelihood that a star belongs to one population or another. This allows us to account for both field stars and cluster stars in a single sample to large angular extents, while the Monte-Carlo simulation accounts for the heteroskedastic uncertainty parameter space of the \Gaia~DR2 data set.
+
+Our comparison with the recent membership work by \cite{cantat-gaudin_gaia_2018} using the same dataset shows a mostly similar membership sample. The differences can be attributed to the inclusion of parallax values by CG18 for the closer clusters, the inclusion of field star populations in our mixture model, as well as the edge effects of the Gaussian kernels used in our membership analysis. We find that our method determines cluster members in a more reliable manner than the k-means minimal spanning tree used by CG18 as it accounts for the field population component. Since we only consider a few clusters, our method is able to more rigorously explore the uncertainty parameter space than that used by CG18, with at least 1000 iterations in our Monte-Carlo simulation as opposed to 10. We note that our cluster membership determination is affected by the sharp cutoff of the edges of the Gaussian kernels. This edge effect artificially lowers the membership probability for stars that are probable members located at the edge of the cluster. This kernel effect is avoided in the spanning tree model used by CG18. For future work it would be worthwhile investigating a mixture model analysis using more accurate cluster models for the parameter spaces, such as isothermal elliptical kernels in spatial dimensions \citep{kuhn_mixture_2017}, and the inclusion of a constant offset model along with two bi-variate Gaussian kernels for the proper motion dimensions.
+
+\section{Kepler-Gaia DR2 Cross-matching}
+
+To combine this membership analysis with the photometric (and thus asteroseismic) \Kepler~information, we need to match the \Kepler~and \Gaia~identifiers.
+
+\citet{berger_revised_2018} produced a \Gaia~cross-matched database for all \Kepler~targeted stars to allow for astrometric analysis of these stars, but excluded non-targeted cluster stars. \cite{colman_pixels_2020} have now extracted light curves for many of these non-targeted stars within the centres of the open clusters from the \Kepler~superstamps. %(\todo{citation}Colman et al. (2019, in prep.),\, %\citet{Colman19}, 
+%Ch. \ref{chap:lightcurves}). 
+These stars are now of particular interest in terms of cluster membership for conducting ensemble asteroseismic analyses, and require a cross-match between \Kepler~and \Gaia~identifiers.
+
+% Before cross-matching the \Gaia~and \Kepler~catalogs, we converted the Gaia stellar positions ($\alpha$, $\delta$) from the J2015.5 reference frame to the J2000.0 reference frame used by the \Kepler~Input Catalog (KIC) \citep{brown_kepler_2011}. 
+Before cross-matching the \Gaia~and \Kepler~catalogs, we corrected the Gaia stellar positions ($\alpha$, $\delta$) for proper motion to the J2000.0 epoch. We then restricted the cross-match to stars within a radius of each cluster centre equal to the angular size used for our membership analysis (see \cref{tab:cluster_selection}).
+
+To begin the cross-match, we removed all KIC stars without a \Kepler~magnitude (Kp). For every \Gaia~star, we selected all matches within an initial 3\,arcsecond radius. We further filtered the matches by imposing a magnitude cut based on the \Gaia~G-band photometry and \Kepler~magnitude to ensure ${|G-K\mathrm{p}| \leq 2}$, and selected the closest star as the best match. We selected this magnitude cutoff to minimize scatter in the \Kepler-\Gaia CMD for stars of all evolutionary stages. Figure \ref{fig:KGcmd} reveals a tight relation between the $G$ and $K_\mathrm{p}$ magnitudes for the red giant and red clump stars, with greater scatter around the main sequence stars and turn-off. For any duplicate \Kepler~matches we selected the \Gaia~match with the smallest angular separation. We then removed this \Kepler~match from the possible matches, and iteratively repeated the cross-match until all stars were matched or no further match was found. 
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[scale=0.5]{Chapter4/kic_gaia_photometric_comparison.png}
+    \caption[Gaia-Kepler colour magnitude diagram]{Gaia-Kepler Colour-magnitude diagram. Field stars (light grey) and cluster stars (dark grey) show a tight relation for the red giant and red clump stars, with greater scatter apparent for the main sequence stars.}
+    \label{fig:KGcmd}
+\end{figure}
+
+Finally, we inspected the angular separations of all the matches %(Figure \ref{fig:angsep_matches}) 
+and removed any with angular separations greater than 1.5 arcseconds. We selected this separation based on a fit to a transformed Poisson distribution capturing 95\% of the total matches. As suggested by \citet{berger_revised_2018}, we assumed any matches beyond this angular separation were likely to be spurious background or foreground contaminants. We joined this cross-matched database with our GMM probability to form our final database of cross-matched cluster stars with membership probabilities. 
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[scale=0.5]{Chapter4/crossmatch_angsep.png}
+%     \caption[Histogram of angular separations for cross-matches.]{Histogram of the angular separations for all cross-matches. A transformed Poisson distribution (red curve) and the 95\% cumulative count (dashed vertical line) highlight the criteria used in separating spurious field contaminants from true matches.}
+%     \label{fig:angsep_matches}
+% \end{figure}
 
 \label{sect:cuts}
 
-\begin{figure}
-\centering
-\includegraphics[width=\linewidth]{Chapter4/cmd_6791.eps}
-\caption[NGC\,6791 CMD]{Colour magnitude diagram of NGC\,6791 based on \Gaia~$g$ and $b-r$ passband photometry, showing likely cluster members (gray) with those that fall inside the \Kepler~super stamps shaded by their posterior probability of membership. The red giant branch (right insert) and blue straggler stars (left insert) are highlighted. For these regions we have further highlighted the non-targeted super stamp stars (red circles, both), red giants observed for less than nine quarters (blue circles, right), and observed blue stragglers (green circles, left)}
-\end{figure}
+For our GMM probability determination, we used a radial distance cut from the cluster centres based on the J2015.5 reference epoch of the \Gaia~DR2 database. As a result of stellar proper motion, a few of the stars at the edges of these radial distance cuts are either not present in the GMM membership determination, or not present in the cross-match database. These stars are all likely to be non-members based on their distance from the cluster centre. We present the number of stars included at each stage of the cross-match, for each cluster field of view, in Table \ref{tab:cluster_crossmatch}. 
 
-\begin{figure}
-\centering
-\includegraphics[width=\linewidth]{Chapter4/cmd_6819.eps}
-\caption[NGC\,6819 CMD]{Colour magnitude diagram of NGC\,6819 based on \Gaia~$g$ and $b-r$ passband photometry, showing likely cluster members (gray) with those that fall inside the \Kepler~super stamps shaded by their posterior probability of membership. The red giant branch (right insert) and blue straggler stars (left insert) are highlighted. For these regions we have further highlighted the non-targeted super stamp stars (red circles, both), red giants observed for less than fifteen quarters (blue circles, right), and observed blue stragglers (green circles, left)}
-\end{figure}
+Extracts of the completed cross-match databases for all four open clusters, showing the 60 highest mean probability cluster members, are presented in Tables \ref{tab:6791mem} - \ref{tab:6866mem}. The complete databases are available online\footnote[2]{https://jason-drury.github.io/}. These tables will be useful for future studies of these clusters. In the next chapter we investigate the cluster red giant members, and compare these astrometric memberships with the comparable asteroseismic membership determinations.
 
-\subsection{Kepler-Gaia DR2 Cross-matching}
-
-% To combine this astrometric analysis with the photometric (and thus asteroseismic) {\em Kepler} information we need to match the {\em Kepler} and {\em Gaia} identifiers.
-
-\citet{berger_revised_2018} produced a \Gaia~cross-matched database for all \Kepler~targeted stars to allow for astrometric analysis of these stars, but excluded non-targeted cluster stars. We have now extracted light curves for many of these non-targeted stars within the centres of the open clusters in the nominal \Kepler~FoV from the \Kepler~superstamps (%\citet{Colman19}, 
-Ch. \ref{chap:lightcurves}). These stars are now of particular interest in terms of cluster membership for conducting ensemble asteroseismic analyses, and require a cross-match between \Kepler~and \Gaia~identifiers.
-
-% Before cross-matching the \Gaia~and \Kepler~catalogs, we converted the Gaia stellar positions ($\alpha$, $\delta$) from the J2015.5 reference frame to the J2000.0 reference frame used by the \Kepler~Input Catalog (KIC) \citep{brown_kepler_2011}. 
-Before cross-matching the \Gaia~and \Kepler~catalogs, we corrected the Gaia stellar positions ($\alpha$, $\delta$) for proper motion to the J2000.0 epoch. We then restricted the cross-match to stars within a radius of each cluster centre matching the cluster radius selected for the cluster membership analysis (see Table \ref{tab:cluster_selection}). 
-
-To begin the cross-match, we removed all KIC stars without a \Kepler~magnitude (Kp). For every \Gaia~star, we selected all matches within an initial 3 arcsecond radius. We further filtered the matches by imposing a magnitude cut based on the \Gaia~g-band photometry and \Kepler~magnitude to ensure ${|g-Kp| \leq 2}$, and selected the closest star as the best match. For any duplicate \Kepler~matches we selected the \Gaia~match with the smallest angular separation as the best match. We then removed this \Kepler~match from the possible matches, and iteratively repeated the cross-match until all stars were matched or no match was found. 
-
-Finally, we removed all matches with angular separations greater than 1.5 arcseconds. We selected 1.5 arcseconds based on a 5\,$\sigma$ interval from a truncated Gaussian fit to the angular separation distribution. We assume any matches beyond this angular separation are likely to be spurious background or foreground contaminants as suggested by \citet{berger_revised_2018}. We present the number of stars included at each stage of the cross-match, for each cluster field of view, in Table \ref{tab:cluster_crossmatch}.
-
-%Could not use APASS gri photometry to fill in Kepler data and generate predicted G mag as Berger due to cluster members typically being much fainter than the limiting cutoff mag for APASS.
-\begin{table}[h]
+\begin{table}[p]
     \centering
-    \setlength\tabcolsep{10pt}
-    \begin{tabular}{ccccc}
-        \hline
-        % Cluster     & RA        & Dec       & Radius    & Radial distance cut \\
-        %             &           &           & (arc mins)& (arc mins) \\
-        % \hline
-        % \hline
-        % NGC 6791    & 290.2208  & 37.771    & 23.0\footnote[2]{$r_t$ - Tidal radius \citep{platais_new_2011}} & 60.0\\
-        % NGC 6819    & 295.325   & 40.1867   & 15.0\footnote[2]{\citet{yang_wiyn_2013}} & 48.0\\
-        NGC 6811    & 294.3208  & 46.3883   & 7.0               & 17.5\\
-        NGC 6866    & 300.9792  & 44.1583   & 13.0              & 32.5\\
-        \hline
+    \setlength\tabcolsep{11pt}
+    % \renewcommand{\arraystretch}{1.25}
+    \begin{tabular}{lcccc}
+        \toprule
+         & NGC\,6791 & NGC\,6819 & NGC\,6811 & NGC\,6866 \\
+        \midrule
+        \midrule
+        Database (radial cut) &  &  &  & \\
+         - Gaia  & 153626 & 137584 & 29004 & 17841 \\
+         - Kepler& 126866 & 88602 & 25168 & 10078 \\\rule{-3pt}{1.2em}
+        Stars with Kepler & \multirow{2}{*}{125018} & \multirow{2}{*}{86831} & \multirow{2}{*}{24724} & \multirow{2}{*}{9829} \\
+        magnitudes ($K_p$) &  &  &  & \\\rule{-3pt}{1.2em}
+        Target light & \multirow{2}{*}{2404} & \multirow{2}{*}{3372} & \multirow{2}{*}{1215} & \multirow{2}{*}{397} \\
+        curves available &  &  &  & \\\rule{-3pt}{1.2em}
+        Cross-matches & 109916 & 80531 & 21318 & 9407 \\\rule{-3pt}{1.2em}
+        Cross-matches & \multirow{2}{*}{103318} & \multirow{2}{*}{75368} & \multirow{2}{*}{19679} & \multirow{2}{*}{8832} \\
+        (ang. sep. $\leq$ 1.5\,arcsec) &  &  &  & \\\rule{-3pt}{1.2em}
+        Final database with & \multirow{2}{*}{102890} & \multirow{2}{*}{74866} & \multirow{2}{*}{19616} & \multirow{2}{*}{8769} \\
+        GMM probabilities &  &  &  & \\\midrule
+        \rule{-3pt}{1.2em}
+        Difference & 428 & 502 & 63 & 63 \\\midrule
+        \rule{-3pt}{2em}
+        Likely members: &  &  &  & \\\rule{-3pt}{1.2em}
+         - Mean posterior & \multirow{2}{*}{0.03} & \multirow{2}{*}{0.03} & \multirow{2}{*}{0.05} & \multirow{2}{*}{0.05} \\
+           probability cut &  &  &  & \\\rule{0pt}{1em}
+         - Stddev posterior & \multirow{2}{*}{0.3} & \multirow{2}{*}{0.3} & \multirow{2}{*}{0.15} & \multirow{2}{*}{0.15} \\
+           probability cut &  &  &  & \\\rule{0pt}{1em}
+         - Mean prob. & 4424 & 3554 & 1296 & 868 \\\rule{-3pt}{1.2em}
+         - Stddev. cut & 3590 & 3275 & 777 & 507 \\\rule{-3pt}{1.2em}
+         - Distance cut & 2388 & 3254 & 393 & 483 \\\rule{-3pt}{1.2em}
+         - In superstamp & 1437 & 1244 & -- & -- \\\rule{-3pt}{1.2em}
+         - Not targeted & 1327 & 1047 & 203 & 379 \\\rule{-3pt}{1.2em}
+         - Partial mission target & 8 ($\leq$ 8 Qs) & 155 ($\leq$ 14 Qs) & -- & -- \\\rule{-3pt}{1.2em}
+         - Full mission target & 110 & 177 & 190 & 104 \\
+        \bottomrule
     \end{tabular}
-    \caption{Number of stars present in the cross-matched database at each stage.}
+    \caption[Number of stars present in the cross-matched database at each stage]{Number of stars present in the cross-matched database at each stage. The top rows list the initial number of stars within the cluster radius for the Kepler Input Catalog (KIC) and the Gaia DR2 catalog. The total number of cross matches is followed by the number remaining after likely contaminants are removed, based on a maximum angular separation of 1.5\,arcsecs. The number of stars with GMM membership probabilities is listed, with the difference between these two numbers underneath. The number of stars with membership probabilities differs slightly from the cross match as the latter includes proper motion corrections for stellar positions. The stars that are different are all located at the edge of the selected radius, beyond the cluster radii, and will be non-members. The values selected for the mean and standard deviation cuts within the cluster membership distributions are shown, followed by the number of likely members after each cut is made. An additional distance cut removes any stars that have serendipitously similar proper motions to the mean open cluster motion. This row shows the number of stars in our final cluster membership determination.}
     \label{tab:cluster_crossmatch}
 \end{table}
 
-
-NGC 6791  [125\,018 KIC stars and 153\,626 \Gaia~stars] to begin the cross-match.
-
-
-
+%Could not use APASS gri photometry to fill in Kepler data and generate predicted G mag as Berger due to cluster members typically being much fainter than the limiting cutoff mag for APASS.
 
 % For stars with multiple matches that satisfied these criteria, we decided to keep those with the smallest angular separations. Of the 197,104 stars present in the KSPC, we identified Gaia DR2 source matches for 195,710. Stars with poorly determined parallaxes (σ π /π > 0.2), low effective temperatures based on our adopted values (T eff < 3000 K, see Section 2.2), extremely low log g (< 0.1 dex), and/or non-“AAA”-quality Two Micron All Sky Survey (2MASS) photometry were rejected from our sample.
 
 % Additionally, we made astrometric cuts similar to those described in Appendix C of Lindegren et al. (2018) and Section 4.1 of Arenou et al. (2018). In particular, we used Equation (1) (unit weight error compared to a function of the G magnitude of the source that helps filter contamination from binaries and calibration problems) and Equation (3) (greater than eight groups of observations separated by at least 4 days) of Arenou et al. (2018) to remove stars with bad astrometric solutions. We did not use the astrometric excess noise values provided by Gaia DR2 to filter stars because they were less discriminating for stars with G < 15 due to the “degree of freedom bug” (see Appendix A and C of Lindegren et al. 2018). We did not use Equation (2) of Arenou et al. (2018), a cut ensuring that Gaia has clean photometry of the included sources, because we utilized separate 2MASS photometry in our analysis. As discussed in Lindegren et al. (2018), our imposed cuts removed many stars that appear in unphysical areas of radius-T eff parameter space, such as the “subdwarfs” between the stellar main sequence and the white dwarf branch. Excluding these stars reduced our final sample to 177,911 Kepler stars.
 
-% Methodology:
-% Position, pm and colour-photometry from Gaia - g, b, r => Conversion to Kepler (Kp) magnitudes
-
-% Match on Kp (calculated) and measured -> remove any greater than 2mags
-% Closest match
-
-% Results:
-
-Database of Kepler and Gaia ID's including the information from both databases. (Include table of ~20 examples [<= 1 page] with extended match online)
+% \newpage
+% \subsection*{Declaration}
+% The work presented in this chapter was conducted in conjunction with my supervisors Dennis Stello and Tim Bedding who provided suggestions and feedback on the analysis as it proceeded.

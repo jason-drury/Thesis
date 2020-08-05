@@ -14,6 +14,7 @@
 \usepackage{color}                 						%% color latex stuff
 \usepackage{amsmath}               					%% lots of maths symbols =)
 \usepackage{amssymb}              					%% even more maths symbols =)
+\usepackage{mathabx}
 \usepackage{subfigure}             					%% lets you put more than one graphic into a figure, but not terribly useful
 \usepackage{xspace}                						%% this package detects whether to put space in or not - I don't think it works very well
 \usepackage{listings}              						%% for putting some program code into the document
@@ -47,15 +48,15 @@
 \usepackage{pdflscape}
 \usepackage[final]{pdfpages}
 \usepackage{hyperref}
+\hypersetup{linkcolor=blue,citecolor=blue,filecolor=blue,urlcolor=blue}
 \usepackage{multicol}
 \usepackage[font=small,labelfont=bf]{caption}
 \usepackage{epigraph}
 \usepackage{textcomp}
 \usepackage{gensymb}
+% \usepackage{lscape} %For superlongsidewaystables use landscape
 
-\usepackage[nameinlink]{cleveref}   %References to Sections with fancy symbol
-\crefname{paragraph}{\S}{\S\S} % default is {paragraph}{paragraphs}
-
+\usepackage[capitalise,nameinlink]{cleveref}   %References to Sections with fancy symbol
 \usepackage{enumitem}                   %Spacing within enumerate and itemize options
 \setlist{nosep}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -78,7 +79,6 @@
 
 \usepackage{natbib}              %% the bibliography stylin'
 \bibpunct[, ]{(}{)}{;}{a}{}{,}     %% oh yeah, I could tell you what this does, but nah! (needs natbib)
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage[calcwidth]{titlesec}   %% This next bit changes the section titles to be pretty
@@ -155,7 +155,7 @@
 \def\etc{{\color{red}$\mathbf{\dots}$}}
 \def\n612{NGC\,612}
 \newcommand\ion[2]{\text{#1\,\textsc{\lowercase{#2}}}}
-
+\DeclareMathOperator{\sinc}{sinc}
 
 %-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
 %-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------% 
@@ -180,27 +180,42 @@
 \def\n6819{NGC\,6819}
 \def\n6811{NGC\,6811}
 \def\n6866{NGC\,6866}
-\newcommand{\Msol}{M$_{\odot}$}
-\newcommand{\Lsol}{L$_{\odot}$}
+\newcommand{\Msol}{$M_{\odot}$}
+\newcommand{\Teffsol}{$T_{\mathrm{eff},\odot}$}
+\newcommand{\Rsol}{$R_{\odot}$}
+\newcommand{\Lsol}{$L_{\odot}$}
+
+\newcommand{\Teff}{$T_{\mathrm{eff}}$}
+
+\newcommand{\numax}{$\nu_{\mathrm{max}}$}
+\newcommand{\dnu}{$\Delta\nu$}
+\newcommand{\numaxsol}{$\nu_{\mathrm{max},\odot}$}
+\newcommand{\dnusol}{$\Delta\nu_{\odot}$}
+
+\interfootnotelinepenalty=10000
+
+\newcommand{\Var}{\operatorname{Var}}
 
 \newcommand{\expect}[1]{\langle{#1}\rangle}
 \renewcommand{\labelenumi}{(\arabic{enumi})}
 
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}  %% make footnote symbols like dagger, and asterisk instead of numbers
 
-\usepackage{titlepage_sydney_uni}  %% my redefinition of \maketitle to put the UniMelb logo on the title-page, along with a nice layout
-                                      %% the option [acidfree] for this package puts the text "Produced on acid-free paper" at the bottom
-
 \newenvironment{nopointitemize}{\renewcommand\labelitemi{}\begin{itemize}}{\end{itemize}}  %% make an itemize environment with no little point
 
 
+\newcommand\citeowners[1]{\citeauthor{#1}'s\ (\citeyear{#1})}
 
+\usepackage{pstricks}
+\usepackage{psvectorian}
+\usepackage{calligra}
+\usepackage{titlepage_sydney_uni}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-\DeclareGraphicsExtensions{.pdf}
+%\DeclareGraphicsExtensions{.pdf}
 \author{\textsc{Jason Andrew Drury}}
-\title{Stellar variability in Open Clusters: Photometric, asteroseismic and astrometric ensemble analysis of {\it Kepler}'s superstamps}
+\title{Observing variable stars and open clusters in the nominal \Kepler{} superstamps}
 \date{\textsc{\today}}
 \maketitle
 
@@ -218,21 +233,31 @@
 
 \input{Chapter_Preface/acronyms}
 
-\input{Chapter_Preface/motivation}
+% \input{Chapter_Preface/motivation}
 
 \input{Chapter1/Intro} %Literature review - Photometry of variable stars and open clusters
-\input{Chapter2/Chapter_2} %Kepler and Open clusters - Initial SAP
-\input{Chapter3/Chapter_Fluffy} % Work on superstamps and extraction.
 \input{Chapter4/Chapter_4} % Work on cluster membership
 \input{Chapter5/Chapter_5} % Work on cluster RGs - orientation
+\input{Chapter3/Chapter_Fluffy} % Work on superstamps and extraction.
 \input{Chapter6/Chapter_6} % Work on cluster RGs - mode identification/modelling
-\input{Chapter_Future} % Future work to be completed
+%\input{Chapter_Future} % Future work to be completed
 \input{Chapter_Summary/Summary} % Summary & Conclusions
 
+%\input{Chapter2/Chapter_2} %Kepler and Open clusters - Initial SAP
 % \cleardoublepage
 % \renewcommand{\thepage}{\rm \arabic{page}}
 % \setcounter{page}{1}
 % %\renewcommand\chapterheadstartvskip{\vspace*{-5\baselineskip}}
+
+\clearpage
+\appendix
+\input{Chapter_Appended/AppendixA} % filename in curly brackets
+% \input{Chapter_Appended/AppendixB} % filename in curly brackets
+% \chapter{Name of Appendix B}
+% \label{whatever}
+% % \input{appendixB} % filename in curly brackets**
+\clearpage
+\phantomsection
 
 %\cleardoublepage
 %\input{chapter2/ch2}
@@ -250,7 +275,7 @@
 %\input{chapterLast/end}
 %\cleardoublepage
 % \input{backmatter/}
-\bibliographystyle{apalike}
-% \bibliographystyle{mn2e}
+% \bibliographystyle{apalike}
+\bibliographystyle{mn2e}
 \bibliography{bibi}
 \end{document}

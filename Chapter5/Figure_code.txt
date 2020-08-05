@@ -1,0 +1,456 @@
+# CBVs inspection:
+
+import pandas as pd 
+import matplotlib.pyplot as plt
+import numpy as np
+import lightkurve as lk
+import glob
+from tqdm import tqdm
+
+subsets = [None,'rgs']
+clusters = ['6791','6819']
+
+cbvdir = '/media/jdru4706/sombrero/ClusterData/ISdata'
+
+for subset in subsets:
+    for cluster in clusters:
+        if subset == None:
+            allcbvs = glob.glob(f'{cbvdir}/CBVs_{cluster}_q??.csv')
+        else:
+            allcbvs = glob.glob(f'{cbvdir}/CBVs_{cluster}_q??_rgs.csv')
+        
+        allcbvs.sort()
+        for cbvfile in tqdm(allcbvs):
+            q = cbvfile.split('_q')[1][:2]
+            d = pd.read_csv(cbvfile)
+            ncbvs=8 
+            fig = plt.figure(figsize=(12,12))
+            widths = [2, 2, 2]
+            heights = np.ones(ncbvs).astype(list)
+            spec = fig.add_gridspec(ncols=3, nrows=ncbvs, width_ratios=widths, height_ratios=heights, wspace=0.0,hspace=0.0)
+        
+            for i,cbv in enumerate(d.columns[:ncbvs].values):
+                lc = lk.LightCurve(d.time,d[cbv]) 
+        
+                ax1=fig.add_subplot(spec[int(i),0])
+                ax1.scatter(lc.time,lc.flux,s=0.5,c='b')
+                ax1.spines['right'].set_linewidth(2)
+                ax1.spines['left'].set_linewidth(2)
+                if i < ncbvs-1:
+                    ax1.set_xticks([])
+        
+                ps = lc.to_periodogram(freq_unit='microHertz',oversample_factor=5,normalization='psd')
+        
+                ax2=fig.add_subplot(spec[int(i),1])
+                ax2.plot(ps.frequency.value,ps.power.value,lw=0.4,color='b')
+                ax2.set_yticks([])
+                ax2.spines['left'].set_linewidth(2)
+                if i < ncbvs-1:
+                    ax2.set_xticks([])
+            
+                ax3 = fig.add_subplot(spec[int(i),2])
+                ax3.plot(ps.frequency.value,ps.power.value,lw=0.4,color='b')
+                ax3.set_xscale('log')
+                ax3.set_yscale('log')
+                ax3.yaxis.tick_right()
+                ax3.spines['right'].set_linewidth(2)
+            
+                if i == 0:
+                    for ax in [ax1,ax2,ax3]: 
+                        ax.spines['top'].set_linewidth(2)    
+        
+                if i == ncbvs-1: 
+                    ax1.set_xlabel('Time (d)') 
+                    ax2.set_xlabel(r'Frequency ($\mu$Hz)')
+                    ax3.set_xlabel(r'Frequency ($\mu$Hz)')
+                    for ax in [ax1,ax2,ax3]:
+                        ax.spines['bottom'].set_linewidth(2)
+            plt.tight_layout()
+            if subset == 'rgs':
+                plt.savefig(f'/home/jdru4706/Dropbox_USyd/Apps/Overleaf/Thesis/Chapter5/cbv_{cluster}_rgs_q{q}.png')
+            else:
+                plt.savefig(f'/home/jdru4706/Dropbox_USyd/Apps/Overleaf/Thesis/Chapter5/cbv_{cluster}_q{q}.png')
+            plt.close()
+        
+
+
+# Nike Diagram:
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+
+d2 = pd.read_csv('/home/jdru4706/all_rgs_6819.csv',na_values=['#', '??','?','-']) 
+d = pd.read_csv('all_rgs_6791.csv',na_values=['#', '??','?','-']) 
+
+y18 = pd.read_csv('/home/jdru4706/Documents/yu_1.csv') 
+y20 = pd.read_csv('/home/jdru4706/Downloads/finaltable.csv') 
+yc = y18.merge(y20,left_on='KICID',right_on='kicid',how='outer')
+ycr = yc[yc['numax_x'].isna()]
+ycg = yc[~yc['numax_x'].isna()] 
+
+# Nike - 6791
+fig = plt.figure(figsize=(15,14))
+ax1 = fig.add_subplot(211)
+ax1.set_xscale('log')
+ax1.set_yscale('log')
+ax1.set_ylabel(r'$\Delta\nu$ ($\mu$Hz)')
+#ax1.set_xlabel(r'$\nu_{\mathrm{max}}$ ($\mu$Hz)')
+ax1.set_xticks([])
+ax1.set_xlim((0.5,455))
+ax1.scatter(ycg.numax_x,ycg.dnu_x,s=1,c='lightgrey')
+ax1.scatter(ycr.numax_y,ycr.dnu_y,s=1,c='lightgrey')
+ax1.scatter(d['numax.4'].values,d['dnu.4'].values,c='g',s=15,label='Yu et al. (2020)')
+ax1.scatter(d['numax.1'].values,d['dnu.1'].values,c='b',s=15,label='Yu et al. (2018)')
+ax1.scatter(d['numax.3'].values,d['dnu.3'].values,c='purple',s=15,label='Bellamy (2015)')
+ax1.scatter(d.numax,d.dnu,s=20,c='r',label='this work')
+plt.legend()
+
+ax2 = fig.add_subplot(212)
+ax2.set_xscale('log')
+ax2.set_yscale('log')
+ax2.set_ylabel(r'$\nu_{\mathrm{max}}^{0.75}/\Delta\nu$')
+ax2.set_xlabel(r'$\nu_{\mathrm{max}}$ ($\mu$Hz)')
+ax2.set_xlim((0.5,455))
+ax2.set_ylim((2.28,7.25))
+ax2.scatter(ycg.numax_x,ycg.numax_x**0.75/ycg.dnu_x,s=1,c='lightgrey') 
+ax2.scatter(ycr.numax_y,ycr.numax_y**0.75/ycr.dnu_y,s=1,c='lightgrey')
+ax2.scatter(d['numax.4'].values,d['numax.4'].values**0.75/d['dnu.4'].values,c='g',s=15,label='Yu et al. (2020)')
+ax2.scatter(d['numax.1'].values,d['numax.1'].values**0.75/d['dnu.1'].values,c='b',s=15,label='Yu et al. (2018)')
+ax2.scatter(d['numax.3'].values,d['numax.3'].values**0.75/d['dnu.3'].values,c='purple',s=15,label='Bellamy (2015)')
+ax2.scatter(d.numax,d.numax**0.75/d.dnu,s=20,c='r',label='this work')
+plt.legend(loc='upper left')
+plt.subplots_adjust(hspace=0)
+
+# Nike - 6819
+
+fig = plt.figure(figsize=(15,14))
+ax1 = fig.add_subplot(211)
+ax1.set_xscale('log')
+ax1.set_yscale('log')
+ax1.set_ylabel(r'$\Delta\nu$ ($\mu$Hz)')
+#ax1.set_xlabel(r'$\nu_{\mathrm{max}}$ ($\mu$Hz)')
+ax1.set_xticks([])
+ax1.set_xlim((0.5,455))
+ax1.scatter(ycg.numax_x,ycg.dnu_x,s=1,c='lightgrey')
+ax1.scatter(ycr.numax_y,ycr.dnu_y,s=1,c='lightgrey')
+ax1.scatter(d2['numax.4'].values,d2['dnu.4'].values,c='g',s=15,label='Yu et al. (2020)')
+ax1.scatter(d2['numax.1'].values,d2['dnu.1'].values,c='b',s=15,label='Yu et al. (2018)')
+ax1.scatter(d2['numax.3'].values,d2['dnu.3'].values,c='purple',s=15,label='Bellamy (2015)')
+ax1.scatter(d2.numax,d2.dnu,s=20,c='r',label='this work')
+plt.legend()
+
+ax2 = fig.add_subplot(212)
+ax2.set_xscale('log')
+ax2.set_yscale('log')
+ax2.set_ylabel(r'$\nu_{\mathrm{max}}^{0.75}/\Delta\nu$')
+ax2.set_xlabel(r'$\nu_{\mathrm{max}}$ ($\mu$Hz)')
+ax2.set_xlim((0.5,455))
+ax2.set_ylim((2.28,7.25))
+ax2.scatter(ycg.numax_x,ycg.numax_x**0.75/ycg.dnu_x,s=1,c='lightgrey') 
+ax2.scatter(ycr.numax_y,ycr.numax_y**0.75/ycr.dnu_y,s=1,c='lightgrey')
+ax2.scatter(d2['numax.4'].values,d2['numax.4'].values**0.75/d2['dnu.4'].values,c='g',s=15,label='Yu et al. (2020)')
+ax2.scatter(d2['numax.1'].values,d2['numax.1'].values**0.75/d2['dnu.1'].values,c='b',s=15,label='Yu et al. (2018)')
+ax2.scatter(d2['numax.3'].values,d2['numax.3'].values**0.75/d2['dnu.3'].values,c='purple',s=15,label='Bellamy (2015)')
+ax2.scatter(d2.numax,d2.numax**0.75/d2.dnu,s=20,c='r',label='this work')
+plt.legend(loc='upper left')
+plt.subplots_adjust(hspace=0)
+
+## Dnu
+fig = plt.figure(figsize=(15,14))
+ax1 = fig.add_subplot(211)
+ax1.set_xscale('log')
+ax1.set_yscale('log')
+ax1.set_ylabel(r'$\Delta\nu$ ($\mu$Hz)')
+#ax1.set_xlabel(r'$\nu_{\mathrm{max}}$ ($\mu$Hz)')
+ax1.set_xticks([])
+ax1.set_xlim((0.5,455))
+ax1.scatter(ycg.numax_x,ycg.dnu_x,s=1,c='lightgrey')
+ax1.scatter(ycr.numax_y,ycr.dnu_y,s=1,c='lightgrey')
+ax1.scatter(d['numax.4'].values,d['dnu.4'].values,c='g',s=15,label='Yu et al. ')
+ax1.scatter(d['numax.1'].values,d['dnu.1'].values,c='g',s=15)
+ax1.scatter(d['numax.3'].values,d['dnu.3'].values,c='blue',s=15,label='Bellamy (2015)')
+ax1.scatter(d.numax,d.dnu,s=20,c='r',label='this work')
+plt.legend()
+ax2 = fig.add_subplot(212)
+ax2.set_xscale('log')
+ax2.set_yscale('log')
+ax2.set_ylabel(r'$\Delta\nu$ ($\mu$Hz)')
+#ax1.set_xlabel(r'$\nu_{\mathrm{max}}$ ($\mu$Hz)')
+ax2.set_xlim((0.5,455))
+ax2.scatter(ycg.numax_x,ycg.dnu_x,s=1,c='lightgrey')
+ax2.scatter(ycr.numax_y,ycr.dnu_y,s=1,c='lightgrey')
+ax2.scatter(d2['numax.4'].values,d2['dnu.4'].values,c='g',s=15,label='Yu et al.')
+ax2.scatter(d2['numax.1'].values,d2['dnu.1'].values,c='g',s=15)
+ax2.scatter(d2['numax.3'].values,d2['dnu.3'].values,c='blue',s=15,label='Bellamy (2015)')
+ax2.scatter(d2.numax,d2.dnu,s=20,c='r',label='this work')
+plt.legend()
+ax2.set_xlabel(r'$\nu_{\mathrm{max}}$ ($\mu$Hz)')
+from matplotlib.offsetbox import AnchoredText
+at1 = AnchoredText('NGC 6791',loc='upper center',prop=dict(size=14))
+ax1.add_artist(at1)
+at2 = AnchoredText('NGC 6819',loc='upper center',prop=dict(size=14))
+ax2.add_artist(at2)
+plt.tight_layout()
+plt.subplots_adjust(hspace=0)
+
+#Dnu2
+
+fig = plt.figure(figsize=(15,14))
+ax1 = fig.add_subplot(211)
+ax1.set_xscale('log')
+ax1.set_yscale('log')
+ax1.set_xticks([])
+ax1.set_ylabel(r'$\nu_{\mathrm{max}}^{0.75}/\Delta\nu$')
+ax1.set_xlim((0.5,455))
+ax1.set_ylim((2.45,5.6))
+ax1.scatter(ycg.numax_x,ycg.numax_x**0.75/ycg.dnu_x,s=1,c='lightgrey') 
+ax1.scatter(ycr.numax_y,ycr.numax_y**0.75/ycr.dnu_y,s=1,c='lightgrey')
+ax1.scatter(d['numax.4'].values,d['numax.4'].values**0.75/d['dnu.4'].values,c='g',s=15,label='Yu et al.')
+ax1.scatter(d['numax.1'].values,d['numax.1'].values**0.75/d['dnu.1'].values,c='g',s=15)
+ax1.scatter(d['numax.3'].values,d['numax.3'].values**0.75/d['dnu.3'].values,c='blue',s=15,label='Bellamy (2015)')
+ax1.scatter(d.numax,d.numax**0.75/d.dnu,s=20,c='r',label='this work')
+plt.legend(loc='upper left')
+plt.subplots_adjust(hspace=0)
+ax2 = fig.add_subplot(212)
+ax2.set_xscale('log')
+ax2.set_yscale('log')
+ax2.set_ylabel(r'$\nu_{\mathrm{max}}^{0.75}/\Delta\nu$')
+ax2.set_xlabel(r'$\nu_{\mathrm{max}}$ ($\mu$Hz)')
+ax2.set_xlim((0.5,455))
+ax2.set_ylim((2.45,5.6))
+ax2.scatter(ycg.numax_x,ycg.numax_x**0.75/ycg.dnu_x,s=1,c='lightgrey') 
+ax2.scatter(ycr.numax_y,ycr.numax_y**0.75/ycr.dnu_y,s=1,c='lightgrey')
+ax2.scatter(d2['numax.4'].values,d2['numax.4'].values**0.75/d2['dnu.4'].values,c='g',s=15,label='Yu et al.')
+ax2.scatter(d2['numax.1'].values,d2['numax.1'].values**0.75/d2['dnu.1'].values,c='g',s=15)
+ax2.scatter(d2['numax.3'].values,d2['numax.3'].values**0.75/d2['dnu.3'].values,c='blue',s=15,label='Bellamy (2015)')
+ax2.scatter(d2.numax,d2.numax**0.75/d2.dnu,s=20,c='r',label='this work')
+plt.legend(loc='upper left')
+plt.subplots_adjust(hspace=0)
+ax2.set_xlim((3,300))
+ax1.set_xlim((3,300))
+at1 = AnchoredText('NGC 6791',loc='upper center',prop=dict(size=14))
+ax1.add_artist(at1)
+at2 = AnchoredText('NGC 6819',loc='upper center',prop=dict(size=14))
+ax2.add_artist(at2)
+plt.tight_layout()
+plt.subplots_adjust(hspace=0)
+
+
+
+# Epsilon
+hon = pd.read_csv('/home/jdru4706/Documents/hon_all.csv') 
+d = pd.read_csv('all_rgs_6791.csv',na_values=['#', '??','?','-']) 
+d2 = pd.read_csv('/home/jdru4706/all_rgs_6819.csv',na_values=['#', '??','?','-']) 
+dnew2 = d2[~d2['epsilon.1'].isna()] 
+dnew = d2[d2['epsilon.1'].isna()] [~d2.epsilon.isna()] 
+
+plt.figure(figsize=(6,8))
+plt.scatter(hon.epsilon,hon.delta_nu,s=2,c='lightgrey',label='Ensemble (Hon et al. 2018)')
+plt.scatter(d['epsilon.1'],d['dnu.1'],s=5,c='r',label='NGC 6791 (Hon et al. 2018)',marker='x')
+plt.scatter(d.epsilon,d.dnu,s=5,c='r', label = 'NGC 6791 (this work)',marker='s')
+plt.scatter(dnew2['epsilon.1'],dnew2['dnu.1'],s=5,c='b',label='NGC 6819 (Hon et al. 2018)',marker='x')
+plt.scatter(dnew.epsilon,dnew.dnu,s=10,c='b',label='NGC 6819 (this work)',marker='s')
+plt.xlabel(r'$\epsilon$')
+plt.ylabel(r'$\Delta\nu$ ($\mu$Hz)')
+plt.legend()
+plt.xlim((0.35,1.7))
+plt.tight_layout()
+
+
+#Rot Mods
+
+import lightkurve as lk
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.offsetbox import AnchoredText
+
+rot_kics = [2438685, 2438242, 2568864, 2570281, 2570330, 2437317]#, 2569653, 2570059]
+le =0.1
+
+fig = plt.figure()
+
+for i,kic in enumerate(rot_kics):
+	lc_full = None
+	for q in [8,9]:#np.arange(18):
+		if q <10:
+			q = f'0{q}'
+		else:
+			q = f'{q}'
+
+		try:
+			dat = pd.read_csv(f'/media/jdru4706/sombrero/ClusterData/ISdata/6791/kic{kic}_q{q}_21_e.dat',delim_whitespace=True, skiprows=1, names=['cad','time','flux'])
+			lc = lk.LightCurve(dat.time,dat.flux)
+			lc.targetid = kic
+		except:
+			continue
+
+		if lc_full is None:
+			lc_full = lc
+		else:
+			shift = np.nanmean(lc_ref[lc_ref.time>=lc_ref.time[-1]-le].flux) - np.nanmean(lc[lc.time<=lc.time[0]+le].flux)
+			lc.flux+=shift
+			lc_full = lc_full.append(lc)
+
+		lc_ref = lc.copy()
+
+	ax = fig.add_subplot(len(rot_kics),1,int(i+1))
+	ax.scatter(lc_full.time,lc_full.flux,s=1,c='k')
+	if i != 5:
+		ax.set_xticks([])
+	else:
+		ax.set_xlabel('Time - 2454833 (BKJD days)')
+
+	at1 = AnchoredText(f'KIC {lc_full.targetid}',loc='upper right',prop=dict(size=8),frameon=False)
+	ax.add_artist(at1)
+
+fig.text(0.02, 0.5, 'Flux', va='center',rotation=90)
+plt.show()
+
+
+
+#CMD
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.axes_grid1.inset_locator import inset_axes
+
+cluster_data = pd.read_csv('/home/jdru4706/Dropbox_USyd/code/redgiant/ngc6791_db_stetmatch.csv',dtype={'kic_kepler_id':str,'source_id':str})
+
+cluster_data.num_quarters.replace(np.nan, 0,inplace=True)
+cluster_data.stet_V.replace(99.999, np.nan, inplace=True)
+cluster_data.stet_dV.replace(9.9999,np.nan, inplace=True)
+cluster_data.stet_B.replace(99.999,np.nan, inplace=True)
+cluster_data.stet_dB.replace(9.9999,np.nan, inplace=True)
+cluster_data.stet_I.replace(99.999,np.nan, inplace=True)
+cluster_data.stet_dI.replace(9.9999,np.nan, inplace=True)
+cluster_data.stet_R.replace(99.999,np.nan, inplace=True)
+cluster_data.stet_dR.replace(9.9999,np.nan, inplace=True)
+cluster_data.stet_U.replace(99.999,np.nan, inplace=True)
+cluster_data.stet_dU.replace(9.9999,np.nan, inplace=True)
+
+cluster_data = cluster_data.sort_values(['kic_kepler_id','num_quarters'],ascending=[True,False]).drop_duplicates(subset='kic_kepler_id',keep='first')
+
+cluster = cluster_data.query('meanprob>=0.01')
+ss = cluster.query('xcoords>=0 and xcoords<=200 and ycoords>=0 and ycoords<=200')
+
+rgkics = np.array([2438721, 2846441, 2155467, 2984150, 2571164, 2571524, 2298436, 2569240, 2707336, 2438675, 2847282]).astype(str)
+
+rdfkics = np.array([2568864, 2438685, 2437317, 2438242, 2570281, 2570330]).astype(str)
+
+intkics = np.array([2572134, 2438148]).astype(str)
+
+add = cluster[cluster.kic_kepler_id.isin(rgkics)]
+#add_rot = cluster[cluster.kic_kepler_id.isin(rotkics)]
+add_int = cluster[cluster.kic_kepler_id.isin(intkics)]
+add_rdfs = cluster[cluster.kic_kepler_id.isin(rdfkics)]
+
+fig = plt.figure(figsize=(12,8))
+ax = fig.add_subplot(111)
+
+ax.scatter(cluster.bp_rp.values, cluster.phot_g_mean_mag.values,c='lightgrey',s=3)
+ax.scatter(ss.bp_rp, ss.phot_g_mean_mag,c='grey',s=3)
+ax.scatter(add.bp_rp, add.phot_g_mean_mag, s=10, c='r',label='new RGs')
+#ax.scatter(add_rot.bp_rp, add_rot.phot_g_mean_mag, s=10, c='orange',label='New Rotational Modulation')
+ax.scatter(add_int.bp_rp, add_int.phot_g_mean_mag, s=10, c='limegreen',label='other variables')
+ax.scatter(add_rdfs.bp_rp, add_rdfs.phot_g_mean_mag, s=10, c='blue', label='foreground red dwarfs or background giants')
+
+for kic in rgkics:
+	star = add[add.kic_kepler_id==kic]
+	ax.annotate(kic,(star.bp_rp,star.phot_g_mean_mag),fontsize=8,rotation=10)
+
+#for kic in rotkics:
+#	star = add_rot[add_rot.kic_kepler_id==kic]
+#	ax.annotate(kic,(star.bp_rp,star.phot_g_mean_mag+0.1),fontsize=8,rotation=10)
+
+for kic in intkics:
+	star = add_int[add_int.kic_kepler_id==kic]
+	ax.annotate(kic,(star.bp_rp,star.phot_g_mean_mag),fontsize=8,rotation=10)
+
+for kic in rdfkics:
+	star = add_rdfs[add_rdfs.kic_kepler_id==kic]
+	ax.annotate(kic,(star.bp_rp,star.phot_g_mean_mag+0.1),fontsize=8,rotation=10)
+
+plt.legend()
+plt.gca().invert_yaxis()
+
+ax.set_ylabel('Gaia G (mag)')
+ax.set_xlabel(r'G$_{BP}$ - G$_{RP}$ (mag)')
+
+plt.xlim((1.3,1.66))
+plt.ylim((17.8,13.9))
+
+axins = inset_axes(ax, width=1.3, height=0.9,loc='upper left') 
+# axins = inset_axes(ax, width=1.3, height=0.9,loc = (1.32,15))
+axins.scatter(cluster.bp_rp.values, cluster.phot_g_mean_mag.values,c='lightgrey',s=3)
+axins.scatter(ss.bp_rp, ss.phot_g_mean_mag,c='grey',s=3)
+axins.scatter(add.bp_rp, add.phot_g_mean_mag, s=6, c='r')
+for kic in rgkics:
+	star = add[add.kic_kepler_id==kic]
+	axins.annotate(kic,(star.bp_rp,star.phot_g_mean_mag),fontsize=8,rotation=10)
+
+axins.set_xlim((3.1, 3.75))
+axins.set_ylim((13.5, 11.5))
+
+
+
+#CMD 6819
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.axes_grid1.inset_locator import inset_axes
+
+cluster_data = pd.read_csv('/home/jdru4706/Dropbox_USyd/Research/cluster_membership/ngc6819_db.csv',dtype={'kic_kepler_id':str,'source_id':str})
+
+cluster_data.num_quarters.replace(np.nan, 0,inplace=True)
+
+cluster_data = cluster_data.sort_values(['kic_kepler_id','num_quarters'],ascending=[True,False]).drop_duplicates(subset='kic_kepler_id',keep='first')
+
+cluster = cluster_data.query('meanprob>=0.01')
+ss = cluster.query('xcoords>=0 and xcoords<=200 and ycoords>=0 and ycoords<=200')
+
+rgkics = np.array([5024511, 5024571, 5200223]).astype(str)
+
+rdfkics = np.array([5024517, 5024582, 5112734, 5111718, 5112751]).astype(str)
+
+#intkics = np.array([2569752, 2570059, 2437060, 2438148, 2570182, 2569653]).astype(str)
+
+add = cluster[cluster.kic_kepler_id.isin(rgkics)]
+#add_rot = cluster[cluster.kic_kepler_id.isin(rotkics)]
+#add_int = cluster[cluster.kic_kepler_id.isin(intkics)]
+add_rdfs = cluster[cluster.kic_kepler_id.isin(rdfkics)]
+
+fig = plt.figure(figsize=(12,8))
+ax = fig.add_subplot(111)
+
+ax.scatter(cluster.bp_rp.values, cluster.phot_g_mean_mag.values,c='lightgrey',s=3)
+ax.scatter(ss.bp_rp, ss.phot_g_mean_mag,c='grey',s=3)
+ax.scatter(add.bp_rp, add.phot_g_mean_mag, s=10, c='r',label='new RGs')
+#ax.scatter(add_rot.bp_rp, add_rot.phot_g_mean_mag, s=10, c='orange',label='New Rotational Modulation')
+#ax.scatter(add_int.bp_rp, add_int.phot_g_mean_mag, s=10, c='limegreen',label='other variables')
+ax.scatter(add_rdfs.bp_rp, add_rdfs.phot_g_mean_mag, s=10, c='blue', label='RGs with new $\epsilon$ measurements')
+
+for kic in rgkics:
+    star = add[add.kic_kepler_id==kic]
+    ax.annotate(kic,(star.bp_rp,star.phot_g_mean_mag),fontsize=8,rotation=10)
+
+#for kic in rotkics:
+#   star = add_rot[add_rot.kic_kepler_id==kic]
+#   ax.annotate(kic,(star.bp_rp,star.phot_g_mean_mag+0.1),fontsize=8,rotation=10)
+
+#for kic in intkics:
+#   star = add_int[add_int.kic_kepler_id==kic]
+#   ax.annotate(kic,(star.bp_rp,star.phot_g_mean_mag),fontsize=8,rotation=10)
+
+for kic in rdfkics:
+   star = add_rdfs[add_rdfs.kic_kepler_id==kic]
+   ax.annotate(kic,(star.bp_rp,star.phot_g_mean_mag+0.1),fontsize=8,rotation=10)
+
+plt.legend()
+plt.gca().invert_yaxis()
+
+ax.set_ylabel('Gaia G (mag)')
+ax.set_xlabel(r'G$_{BP}$ - G$_{RP}$ (mag)')

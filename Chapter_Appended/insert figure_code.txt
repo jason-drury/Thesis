@@ -1,0 +1,46 @@
+cluster = '6791'
+for subset in ['','rgs_']:
+    for q in np.arange(2,18):
+        if q <10:
+            q = f'0{q}'
+        else:
+            q = str(q)
+        if subset == '':
+            if q=='02':
+                text = f'''
+                \\begin{{figure}}
+                    \\centering
+                    \\includegraphics[width=\\linewidth]{{Chapter_Appended/AppB/cbv_{cluster}_{subset}q{q}.png}}
+                    \\caption{{The first 8 co-trending basis vectors (CBVs) for the second data quarter (left), and the Fourier transform of these vectors (middle), and in log-log space (right) from the full set of image subtracted light curves.}}
+                    \\label{{fig:cbvs_allIS_{cluster}_Q{q}}}
+                \\end{{figure}}
+                '''
+            else:
+                text = f'''
+                \\begin{{figure}}
+                    \\centering
+                    \\includegraphics[width=\\linewidth]{{Chapter_Appended/AppB/cbv_{cluster}_{subset}q{q}.png}}
+                    \\caption{{Same as Figure \\ref{{fig:cbvs_allIS_{cluster}_Q2}} but for quarter {int(q)}.}}
+                    \\label{{fig:cbvs_allIS_{cluster}_Q{q}}}
+                \\end{{figure}}
+                '''
+        else:
+            if q=='02':
+                text = f'''
+                \\begin{{figure}}
+                    \\centering
+                    \\includegraphics[width=\\linewidth]{{Chapter_Appended/AppB/cbv_{cluster}_{subset}q{q}.png}}
+                    \\caption{{The first 8 co-trending basis vectors (CBVs) for the second data quarter (left), and the Fourier transform of these vectors (middle), and in log-log space (right) from the likely red giant member subset of image subtracted light curves.}}
+                    \\label{{fig:cbvs_rgsIS_{cluster}_Q{q}}}
+                \\end{{figure}}
+                '''
+            else:
+                text = f'''
+                \\begin{{figure}}
+                    \\centering
+                    \\includegraphics[width=\\linewidth]{{Chapter_Appended/AppB/cbv_{cluster}_{subset}q{q}.png}}
+                    \\caption{{Same as Figure \\ref{{fig:cbvs_rgsIS_{cluster}_Q2}} but for quarter {int(q)}.}}
+                    \\label{{fig:cbvs_rgsIS_{cluster}_Q{q}}}
+                \\end{{figure}}
+                '''
+        print(text)
