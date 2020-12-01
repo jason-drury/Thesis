@@ -80,8 +80,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-d2 = pd.read_csv('/home/jdru4706/all_rgs_6819.csv',na_values=['#', '??','?','-']) 
-d = pd.read_csv('all_rgs_6791.csv',na_values=['#', '??','?','-']) 
+d2 = pd.read_csv('/home/jdru4706/Thesis_Files/all_rgs_6819.csv',na_values=['#', '??','?','-']) 
+d = pd.read_csv('/home/jdru4706/Thesis_Files/all_rgs_6791.csv',na_values=['#', '??','?','-']) 
 
 y18 = pd.read_csv('/home/jdru4706/Documents/yu_1.csv') 
 y20 = pd.read_csv('/home/jdru4706/Downloads/finaltable.csv') 
